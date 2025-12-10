@@ -1,0 +1,31 @@
+//
+//  Untitled.swift
+//  FunVibeApp
+//
+//  Created by Apprenant 84 on 12/10/25.
+//
+
+//
+//  ContentView.swift
+//  FunVibeApp
+//
+//  Created by Apprenant 84 on 12/10/25.
+//
+
+import SwiftUI
+
+struct WelcomeView: View {
+    var body: some View {
+        VStack {
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundStyle(.tint)
+            Text("Hello, world!")
+        }
+        .padding()
+    }
+}
+
+#Preview {
+    WelcomeView()
+}
