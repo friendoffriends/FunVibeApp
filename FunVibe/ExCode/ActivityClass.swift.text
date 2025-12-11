@@ -1,0 +1,119 @@
+//
+//  ActivityClass.swift
+//  FunVibe
+//
+//  Created by A.Sathiesh 78 on 10/12/2025.
+//
+
+import Foundation
+//import SwiftUI
+
+class Activity: Identifiable {
+    var id: UUID = UUID()
+    var title: String
+    var date: Date? = Date()
+    var time: Date? = Date()
+    var location: String
+    var description: String
+    var image: String? = nil
+    var type: ActivityType
+
+    init(id: UUID, title: String, date: Date, time: Date, location: String, description: String, image: String, type: ActivityType) {
+        self.id = id
+        self.title = title
+        self.date = date
+        self.time = time
+        self.location = location
+        self.description = description
+        self.image = image
+        self.type = type
+    }
+}
+
+enum ActivityType: String {
+    case event, club, workshop , interest
+}
+
+enum ClubCategory: String{
+    case social_community, health_wellness, hobby_base, learning_intellectual, entertainment, recreation , technology_modern, other
+}
+
+enum ExperienceLevel: String{
+    case beginner, novice, intermediate, advanced, expert, master
+}
+
+enum DifficultyLevel: String{
+    case veryeasy, easy, moderate, challenging, hard, extreme
+}
+
+
+class Event: Activity {
+    var Theme: String
+    var organiser: String
+    var participants: [String]
+
+    init(id: UUID, title: String, date: Date, time: Date, location: String, description: String, image: String, type: ActivityType, Theme: String, organiser: String, participants: [String]) {
+        self.Theme = Theme
+        self.organiser = organiser
+        self.participants = participants
+        super.init( id: id, title: title, date: date, time: time, location: location, description: description, image: image, type: type)
+    }
+}
+
+class Club: Activity {
+    var category: ClubCategory
+    var objective: [String]
+    var activities: [String]
+    var subscription: Double? = 0.0
+
+    init(id: UUID, title: String, date: Date, time: Date, location: String, description: String, image: String, type: ActivityType, category: ClubCategory, objective: [String], activities: [String], subscription: Double) {
+        self.category = category
+        self.objective = objective
+        self.activities = activities
+        self.subscription = subscription
+        super.init( id: id, title: title, date: date, time: time, location: location, description: description, image: image, type: type)
+
+    }
+}
+
+class Workshop: Activity {
+    var triner: String
+    var target: [String]
+    var capacity: Int
+    var fee: Double? = 0.0
+    var objecive: String
+
+    init( id: UUID, title: String, date: Date, time: Date, location: String, description: String, image: String, type: ActivityType,
+        triner: String, target: [String], capacity: Int, fee: Double, objecive: String) {
+        self.triner = triner
+        self.target = target
+        self.capacity = capacity
+        self.fee = fee
+        self.objecive = objecive
+        super.init( id: id, title: title, date: date, time: time, location: location, description: description, image: image, type: type)
+    }
+}
+
+class Interest: Activity {
+    var category: String
+    var skillLevel: ExperienceLevel
+    var difficultyLevel: DifficultyLevel
+    var solo: Bool
+    var duration: Double
+    var cost: Double? = 0.0
+    var benefit: [String]? = []
+
+    init( id: UUID, title: String, date: Date, time: Date, location: String, description: String, image: String, type: ActivityType,
+        category: String, skillLevel: ExperienceLevel, difficultyLevel: DifficultyLevel, solo: Bool, duration: Double, cost: Double, benefit: [String]
+    ) {
+        self.category = category
+        self.skillLevel = skillLevel
+        self.difficultyLevel = difficultyLevel
+        self.solo = solo
+        self.duration = duration
+        self.cost = cost
+        self.benefit = benefit
+        super.init( id: id, title: title, date: date, time: time, location: location, description: description, image: image, type: type)
+    }
+}
+
