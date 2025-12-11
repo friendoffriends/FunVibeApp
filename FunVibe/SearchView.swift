@@ -9,7 +9,21 @@ import SwiftUI
 
 struct SearchView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            //Backgroound
+            Image("Background")
+                .resizable()
+                .opacity(0.5)
+
+            //Content
+            VStack {
+                Text("Filter")
+                    .font(.largeTitle)
+                    .foregroundColor(.primary)
+            }
+
+        }
+        .ignoresSafeArea(edges: .all)
     }
 }
 
