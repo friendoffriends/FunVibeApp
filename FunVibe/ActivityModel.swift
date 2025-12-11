@@ -15,6 +15,7 @@ struct Event : Identifiable {
     var description: String
     var image: String? = nil
     var type: ActivityType
+    
     var Theme: String
     var organiser: String
     var participants: [String]

@@ -91,6 +91,12 @@ struct HomeView: View {
                         NavigationLink(destination: AddActivityView()) {
                                 Image(systemName: "plus.circle")
                                 .font(Font.title.bold()).foregroundColor(.orange)
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        NavigationLink(destination: MapView()) {
+                            Image(systemName: "map.circle")
+                                .font(Font.title.bold()).foregroundColor(.orange)
 
                         }
 
