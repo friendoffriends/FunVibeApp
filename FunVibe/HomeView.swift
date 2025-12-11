@@ -84,6 +84,17 @@ struct HomeView: View {
                 .padding(5)
                 .navigationTitle(Text("Activités"))
                 .searchable(text: $searchText)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: SearchView()) {
+                                Image(systemName: "plus.circle")
+                                .font(Font.title.bold()).foregroundColor(.orange)
+
+                        }
+
+                    }
+                }
+
             }
         }
         .ignoresSafeArea(edges: .all)
