@@ -5,13 +5,26 @@
 //  Created by Apprenant 84 on 12/10/25.
 //
 
-import SwiftUI
 
-// test changes for GitHub 11-12-25 10:17am
+import SwiftUI
+import MapKit
 
 struct MapView: View {
+    @State private var cameraPosition: MapCameraPosition = .region(
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(
+                latitude: 43.6047,   // Toulouse
+                longitude: 1.4442
+            ),
+            span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        )
+    )
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Map(position: $cameraPosition) {
+            // add markers later if you want
+        }
+        .ignoresSafeArea()
     }
 }
 
