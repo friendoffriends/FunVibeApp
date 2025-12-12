@@ -14,6 +14,7 @@
 		83D075582EEA28BE001105E8 /* Exceptions for "FunVibe" folder in "FunVibe" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				.swift,
 				ExCode/ActivityClass.swift.text,
 				ExCode/AppData.swift.text,
 			);
@@ -26,6 +27,7 @@
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = AF5B25CC2EE971E3001A6A4A /* Sources */;
 			membershipExceptions = (
+				.swift,
 				ExCode/ActivityClass.swift.text,
 				ExCode/AppData.swift.text,
 			);
@@ -279,6 +281,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = Voice;
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = Voice;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -310,6 +314,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = Voice;
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = Voice;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
