@@ -10,35 +10,9 @@
 		AF5B25D02EE971E3001A6A4A /* FunVibe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FunVibe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		83D075582EEA28BE001105E8 /* Exceptions for "FunVibe" folder in "FunVibe" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				ExCode/ActivityClass.swift.text,
-				ExCode/AppData.swift.text,
-			);
-			target = AF5B25CF2EE971E3001A6A4A /* FunVibe */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		83D075592EEA28BE001105E8 /* Exceptions for "FunVibe" folder in "Compile Sources" phase from "FunVibe" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = AF5B25CC2EE971E3001A6A4A /* Sources */;
-			membershipExceptions = (
-				ExCode/ActivityClass.swift.text,
-				ExCode/AppData.swift.text,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AF5B25D22EE971E3001A6A4A /* FunVibe */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				83D075582EEA28BE001105E8 /* Exceptions for "FunVibe" folder in "FunVibe" target */,
-				83D075592EEA28BE001105E8 /* Exceptions for "FunVibe" folder in "Compile Sources" phase from "FunVibe" target */,
-			);
 			path = FunVibe;
 			sourceTree = "<group>";
 		};
@@ -279,6 +253,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = vc;
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = vc;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -310,6 +286,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = vc;
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = vc;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
