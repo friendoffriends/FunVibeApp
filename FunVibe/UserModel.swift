@@ -14,6 +14,8 @@ import Foundation
      var telephone: String?
      var password: String
      var address: Address
+     var profilePic: String?
+     var hobbies: [String]? = []
 }
 
 
