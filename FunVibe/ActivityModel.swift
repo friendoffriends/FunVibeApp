@@ -18,7 +18,7 @@ struct Event : Identifiable {
     var type: ActivityType
     var Theme: String
     var organiser: User
-    var participants: [String]
+    var participants: [User]
 }
 
 struct Club : Identifiable{
@@ -95,13 +95,9 @@ enum DifficultyLevel: String{
 }
 
 
-
-var clubs: [Club] = [
-    Club(
-       // id: UUID(),
+var exampleClub1 : Club = Club(
+        id: UUID(),
         title: "Spectacles d'humour",
-        date: Date(),
-        time: Date(),
         location: "Club de loisiers, 31000 Toulouse",
         description: "Partager des expériences de vie humoristiques avec une touche de fiction",
         image: "",
@@ -109,6 +105,29 @@ var clubs: [Club] = [
         category: .entertainment,
         objective: ["Partager les événements et les expériences de la vie pour rendre tout le monde heureux"],
         activities: ["Une sorte de thérapie par le rire adaptée à leur âge","Participez aux événements familiaux en tant qu'artiste de performance"],
-        subscription: 0.0
+        subscription: 0.0,
+        organiser: exampleUser1
     )
+
+var exampleClub2 : Club = Club(
+        id: UUID(),
+        title: "Échecs",
+        location: "Club d'échecs, 31300 Toulouse",
+        description: "Partager des expériences de vie humoristiques avec une touche de fiction",
+        image: "",
+        type: .club,
+        category: .entertainment,
+        objective: ["Jouer aux échecs"],
+        activities: ["Échecs"],
+        subscription: 0.0,
+        organiser: exampleUser2
+    )
+
+var exampleClubList : [Club] = [exampleClub1, exampleClub2]
+
+
+var activities : [Identifiable] = [
+    Club(title: <#T##String#>, location: <#T##String#>, description: <#T##String#>, type: <#T##ActivityType#>, category: <#T##ClubCategory#>, objective: <#T##[String]#>, activities: <#T##[String]#>, organiser: <#T##User#>),
+    Event(title: <#T##String#>, location: <#T##String#>, description: <#T##String#>, type: <#T##ActivityType#>, Theme: <#T##String#>, organiser: <#T##User#>, participants: <#T##[User]#>),
+    Interest(title: <#T##String#>, location: <#T##String#>, description: <#T##String#>, type: <#T##ActivityType#>, category: <#T##String#>, skillLevel: <#T##ExperienceLevel#>, difficultyLevel: <#T##DifficultyLevel#>, solo: <#T##Bool#>, duration: <#T##Double#>)
 ]

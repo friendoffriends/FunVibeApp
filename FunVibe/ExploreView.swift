@@ -27,8 +27,8 @@ struct ExploreView: View {
                             .padding(5)
                             .shadow(color: .blue.opacity(0.3), radius: 10,x: 0,y: 5)
                             //.shadow(color: .black.opacity(0.5),radius: 5,x:0, y:10)
-
-                        ForEach(clubs) { club in
+// Changed following line from "ForEach(clubs) { club in" to match new variable name
+                        ForEach(activities) { club in
                             NavigationLink {
                                 //
                             } label: {
