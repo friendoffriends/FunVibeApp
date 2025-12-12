@@ -7,9 +7,9 @@
 
 import Foundation
 
-public struct Address: Identifiable {
-    public var id: UUID = UUID()
-    public var street: String?
-    public var city: String?
-    public var postalCode: String?
+struct Address: Identifiable {
+    var id: UUID = UUID()
+    var street: String?
+    var city: String?
+    var postalCode: String?
 }

@@ -7,13 +7,13 @@
 
 import Foundation
 
-public struct User: Identifiable {
-    public var id: UUID = UUID()
-    public var name: String
-    public var email: String
-    public var telephone: String?
-    public var password: String
-    public var address: Address
+ struct User: Identifiable {
+     var id: UUID = UUID()
+     var name: String
+     var email: String
+     var telephone: String?
+     var password: String
+     var address: Address
 }
 
 
