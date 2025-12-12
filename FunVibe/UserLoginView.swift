@@ -45,6 +45,12 @@ struct UserLoginView: View {
                         Button("Login") {
                             authenticateUser()
                         }
+                        .padding(.bottom, 30)
+
+                        NavigationLink(
+                            destination: CreateUserView()) {
+                                Text("Continue to your profile")
+                            }
                     }
                     .navigationTitle(Text("Login"))
                 }
