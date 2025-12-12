@@ -1,15 +1,45 @@
 //
-//  HomeView.swift
-//  FunVibe
+//  ContentView.swift
+//  FunVibeApp
 //
-//  Created by Apprenant 78 on 10/12/2025.
+//  Created by Apprenant 84 on 12/10/25.
 //
 
 import SwiftUI
 
 struct HomeView: View {
+    var userLoginStatus: Bool = UserDefaults.standard.bool(forKey: "isLoggedIn")
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+
+            TabView {
+
+                ExploreView()
+                    .tabItem {
+                        Label("", systemImage: "house")
+                    }
+
+                SearchView()
+                    .tabItem {
+                        Label("", systemImage: "magnifyingglass")
+                    }
+
+                if (userLoginStatus){
+                    ProfileView()
+                        .tabItem {
+                            Label("", systemImage: "person.circle")
+                        }
+                } else {
+                    UserLoginView()
+                        .tabItem {
+                            Label("", systemImage: "person.fill")
+                        }
+                }
+
+            }
+        }
+        .ignoresSafeArea(edges: .all)
     }
 }
 

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SearchView: View {
+struct AddActivityView: View {
     var body: some View {
         ZStack {
             //Backgroound
@@ -17,7 +17,7 @@ struct SearchView: View {
 
             //Content
             VStack {
-                Text("Filter")
+                Text("Add Activity")
                     .font(.largeTitle)
                     .foregroundColor(.primary)
             }
@@ -28,5 +28,5 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView()
+    AddActivityView()
 }

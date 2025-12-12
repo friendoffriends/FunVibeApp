@@ -1,0 +1,40 @@
+//
+//  AppData.swift
+//  FunVibe
+//
+//  Created by Apprenant 78 on 10/12/2025.
+//
+
+import Foundation
+
+let dateFormatter = DateFormatter()
+
+var clubs: [Club] = [
+    Club(
+        id: UUID(),
+        title: "Spectacles d'humour",
+        date: dateFormatter.date(from:"2025-12-24T10:44:00+0000")!,
+        time: dateFormatter.date(from:"2025-12-24T18:00:00+0000")!,
+        location: "Club de loisiers, 31000 Toulouse",
+        description: "Partager des expériences de vie humoristiques avec une touche de fiction",
+        image: "",
+        type: .club,
+        category: .entertainment,
+        objective: ["Partager les événements et les expériences de la vie pour rendre tout le monde heureux"],
+        activities: ["Une sorte de thérapie par le rire adaptée à leur âge","Participez aux événements familiaux en tant qu'artiste de performance"],
+        subscription: 0.0
+    )
+]
+
+var activities: [Activity] = [
+    Activity(
+        id: UUID(),
+        title: "Spectacles d'humour",
+        date: Date(),
+        time: Date(),
+        location: "Club de loisiers, 31000 Toulouse",
+        description: "Partager des expériences de vie humoristiques avec une touche de fiction",
+        image: "",
+        type: .club
+    )
+]

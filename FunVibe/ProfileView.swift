@@ -9,7 +9,46 @@ import SwiftUI
 
 struct ProfileView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            ZStack {
+                //Backgroound
+                Image("Background")
+                    .resizable()
+                    .opacity(0.5)
+
+                //Content
+                if UserDefaults.standard.bool(forKey: "isLoggedIn") == false {
+                    NavigationLink(destination: UserLoginView()){
+                        Text("Please login to access this page")
+                    }
+                } else {
+                    VStack {
+                        Text("Profile")
+                            .font(.largeTitle)
+                            .foregroundColor(.primary)
+
+                            .padding(20)
+
+                        NavigationLink(destination: ExploreView()) {
+                            Image(systemName: "person.slash")
+                                .font(Font.title.bold()).foregroundColor(.orange)
+                        }.simultaneousGesture(TapGesture().onEnded {
+                            setLogout()
+                        })
+                    }
+                }
+
+
+            }
+            .ignoresSafeArea(edges: .all)
+            .navigationBarTitle("Profile")
+
+        }
+
+    }
+
+    func setLogout() -> Void {
+        UserDefaults.standard.set(false, forKey: "isLoggedIn")
     }
 }
 
