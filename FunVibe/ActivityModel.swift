@@ -9,40 +9,43 @@ import Foundation
 struct Event : Identifiable {
     var id: UUID = UUID()
     var title: String
+    var location: String
+    // var coordinate: CLLocationCoordinate2D?   // filled in later
     var date: Date = Date()
     var time: Date = Date()
-    var location: String
     var description: String
     var image: String? = nil
     var type: ActivityType
-    
     var Theme: String
-    var organiser: String
+    var organiser: User
     var participants: [String]
 }
 
-struct Club  : Identifiable{
+struct Club : Identifiable{
     var id: UUID = UUID()
     var title: String
-    var date: Date = Date()
-    var time: Date = Date()
     var location: String
+    // var coordinate: CLLocationCoordinate2D?   // filled in later
     var description: String
     var image: String? = nil
     var type: ActivityType
-
     var category: ClubCategory
     var objective: [String]
     var activities: [String]
     var subscription: Double? = 0.0
+    var organiser: User
 }
 
+// This struct Workshop is not necessary
+
+/*
 struct Workshop: Identifiable {
     var id: UUID = UUID()
     var title: String
     var date: Date = Date()
     var time: Date = Date()
     var location: String
+    
     var description: String
     var image: String? = nil
     var type: ActivityType
@@ -53,6 +56,7 @@ struct Workshop: Identifiable {
     var fee: Double? = 0.0
     var objecive: String
 }
+*/
 
 struct Interest: Identifiable {
     var id: UUID = UUID()
