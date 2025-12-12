@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    var userLoginStatus: Bool = UserDefaults.standard.bool(forKey: "isLoggedIn")
+
     var body: some View {
         ZStack {
 
@@ -18,10 +20,22 @@ struct HomeView: View {
                         Label("", systemImage: "house")
                     }
 
-                ProfileView()
+                SearchView()
                     .tabItem {
-                        Label("", systemImage: "person")
+                        Label("", systemImage: "magnifyingglass")
                     }
+
+                if (userLoginStatus){
+                    ProfileView()
+                        .tabItem {
+                            Label("", systemImage: "person.circle")
+                        }
+                } else {
+                    UserLoginView()
+                        .tabItem {
+                            Label("", systemImage: "person.fill")
+                        }
+                }
 
             }
         }
