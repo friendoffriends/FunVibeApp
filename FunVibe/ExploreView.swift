@@ -20,20 +20,19 @@ struct ExploreView: View {
             //Content
             NavigationStack {
                 ScrollView(.vertical){
-                    VStack{
+                    VStack (alignment:.leading){
                         RoundedRectangle(cornerRadius: 20)
                             .frame(height: 200)
                             .foregroundColor(.orange.opacity(0.5))
                             .padding(5)
                             .shadow(color: .blue.opacity(0.3), radius: 10,x: 0,y: 5)
-                            //.shadow(color: .black.opacity(0.5),radius: 5,x:0, y:10)
 
-                        ForEach(clubs) { club in
+                        ForEach (funvibes) { activity in
                             NavigationLink {
                                 //
                             } label: {
-                                HStack{
-                                    if club.image == "" {
+                                HStack {
+                                    if activity.image == "" {
                                         Image(systemName: "photo.fill")
                                             .resizable()
                                             .frame(width: 80, height: 80)
@@ -41,8 +40,9 @@ struct ExploreView: View {
                                             .overlay(Circle().stroke(Color.white, lineWidth: 1))
                                             .shadow(radius: 10)
                                             .padding(.leading)
-                                    }else{
-                                        Image(club.image!)
+                                    }
+                                    else{
+                                        Image(activity.image!)
                                             .resizable()
                                             .frame(width: 80, height: 80)
                                             .clipShape(Circle())
@@ -50,23 +50,31 @@ struct ExploreView: View {
                                             .shadow(radius: 10)
                                             .padding(.leading)
                                     }
+
                                     VStack(alignment: .leading){
-                                        Text(club.title)
+                                        Text(activity.title)
                                             .font(Font.headline.bold())
-                                        Text(club.description)
+                                        Text(activity.description)
                                             .font(.subheadline)
                                             .multilineTextAlignment(.leading)
                                             .lineLimit(2)
-                                        //Text("\(club.date.formatted(.dateTime))")
                                         HStack{
-                                            Text(dateFormat(date: club.date))
                                             Spacer()
-                                            Text(club.category.rawValue.capitalized)
-                                                .font(Font.caption).italic()
+                                            Text(dateFormat(date: activity.date)).italic()
+                                            Spacer()
+                                            Text(timeFormat(date: activity.date)).italic()
+                                            Spacer()
+                                            //Text(activity.category.rawValue.capitalized)
+                                              //  .font(Font.caption).italic()
                                         }
+                                        Text("Participants : ")
+                                            .font(Font.caption).italic()
+                                        //Text(activity.participants.count)
+
                                     }
                                     .padding(20)
                                 }
+                                .foregroundColor(.orange)
                                 .background(
                                     Color.white
                                         .cornerRadius(10)
@@ -97,7 +105,6 @@ struct ExploreView: View {
                         NavigationLink(destination: MapView()) {
                             Image(systemName: "map.circle")
                                 .font(Font.title.bold()).foregroundColor(.orange)
-
                         }
 
                     }

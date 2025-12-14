@@ -1,0 +1,107 @@
+//
+//  AppData.swift
+//  FunVibe
+//
+//  Created by Apprenant 78 on 14/12/2025.
+//
+
+import Foundation
+
+/// ADDRESS //////////////////////
+
+var johnAddress: Address {Address(street: "22 Rue Louis-François Lejeune",city: "Toulouse",postCode: "31000")}
+var benAddress: Address {Address(street: "31 Rue Jacques-Jean Esquie", city: "Toulouse", postCode: "31100")}
+var kevinAddress: Address {Address(street: "78 Chem. du Séminaire", city: "Toulouse", postCode: "31200")}
+var marthaAddress: Address {Address(street: "28 Rue Isaac Newton", city: "Blagnac", postCode: "31700")}
+var janeAddress: Address {Address(street: "6 Rue du Roussillon", city: "Toulouse", postCode: "31000")}
+
+var club1Address: Address {Address(street: "10 Chem. de Liffard",city: "Toulouse",postCode: "31000")}
+var club2Address: Address {Address(street: "78 Chem. du Loup", city: "Toulouse", postCode: "31100")}
+
+var event1Address: Address {Address(street: "3 Rue Hubert Monloup", city: "Toulouse", postCode: "31200")}
+var event2Address: Address {Address(street: "167 Rue du Riou", city: "Beauzelle", postCode: "31700")}
+
+
+var addresses: [Address] = [
+    johnAddress, benAddress, kevinAddress, marthaAddress, janeAddress,
+    club1Address,club2Address,
+    event1Address,event2Address
+]
+
+
+/// USER //////////////////////////////////
+var john = User(name: "John", email: "john@example.com", telephone:"0753445645" ,password: "password1234", address: johnAddress)
+var ben = User(name: "Ben", email: "ben@example.com", telephone:"0753445645" ,password: "password2345", address: benAddress)
+var kevin = User(name: "Kevin", email: "kevin@example.com", telephone:"0753445645" ,password: "password3456", address: kevinAddress)
+var martha = User(name: "Martha", email: "marth@example.com", telephone:"0753445645" ,password: "password4567", address: marthaAddress)
+var jane = User(name: "Jane", email: "jane@example.com", telephone:"0753445645" ,password: "password5678", address: janeAddress)
+
+
+var users: [User] = [john, ben, kevin, martha, jane]
+
+
+
+/// ACTIVITIES /////////////////////////////
+var clubGameNight:Club = Club(
+    title: "Game Night",
+    date: Date(),
+    location: club1Address,
+    description: "Join us for a night of epic battles and epic snacks!",
+    image:  "",
+    type: .club,
+    organiser: john,
+    participants: [],
+    category: .hobby_base,
+    objective: ["Have fun", "Make new friends"],
+    activities: ["Video games", "Board games", "Card games"]
+    )
+
+var bookClub:Club = Club(
+    title: "Book Club",
+    date: Date(),
+    location: club2Address,
+    description: "Read fascinating books and connect with like-minded people!",
+    image:  "",
+    type: .club,
+    organiser: ben,
+    participants: [],
+    category: .hobby_base,
+    objective: ["Read more", "Connect with like-minded people"],
+    activities: ["Book clubs", "Reading challenges"]
+    )
+
+var eventComedyShow:Event = Event(
+    title: "Comedy Show",
+    date: Date(),
+    location: event1Address,
+    description: "Catch a comedy show that will make you laugh out loud!",
+    image:  "",
+    type: .event,
+    organiser: jane,
+    participants: [],
+    theme: .comedy
+    )
+
+var majongInterest: Interest = Interest(
+    title: "Mahjong Challenge",
+    date: Date(),
+    location: event2Address,
+    description: "Challenge your friends to a game of mahjong!",
+    image: "",
+    type: .interest,
+    organiser: martha,
+    participants: [],
+    category: "joue de stratégie",
+    skillLevel: .any,
+    difficultyLevel: .any,
+    solo: false,
+    duration: 1.0,
+    cost: 0.0,
+    benefit: ["New friends", "Social interaction"],
+
+)
+
+
+var funvibes: [Activity] = [
+    clubGameNight,bookClub,eventComedyShow, majongInterest
+]

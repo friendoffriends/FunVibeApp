@@ -44,12 +44,19 @@ struct UserLoginView: View {
                             .padding()
                         Button("Login") {
                             authenticateUser()
-                        }
-                        .padding(.bottom, 30)
+
+                        }.disabled(username.isEmpty || password.isEmpty)
+                            .padding()
+                            .buttonStyle(PlainButtonStyle())
+                            .frame(maxWidth: 150, maxHeight: 40)
+                            .background(Color(.systemGray6))
+                            .cornerRadius(20)
+
+                        .padding(.bottom, 50)
 
                         NavigationLink(
                             destination: CreateUserView()) {
-                                Text("Continue to your profile")
+                                Text("Créer un compte")
                             }
                     }
                     .navigationTitle(Text("Login"))
