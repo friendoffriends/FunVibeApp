@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-struct UserView: View {
+struct EditUserView: View {
     
     @State private var fullName = ""
     @State private var email = ""
@@ -263,5 +263,5 @@ struct UserView: View {
 }
 
 #Preview {
-    UserView()
+    EditUserView()
 }
