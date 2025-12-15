@@ -15,7 +15,7 @@ import Speech
 
 struct MicrophoneView: View {
     @State private var fillLevel : CGFloat = 0.0
-    @State var textValue: String = "Press start to record speech..."
+    @State var textValue: String = "Appuez start pour commencer..."
     @State var speechRecognizer = SpeechRecognizer()
     
     @State private var spokenText: String = ""
@@ -23,67 +23,74 @@ struct MicrophoneView: View {
     
     
     var body: some View {
-        ZStack {
-            RadialGradient(
-                gradient: Gradient(colors: [
-                    .white,
-                    .orange.opacity(0.1),
-                    .orange.opacity(0.4)
-                ]
-                                   
-                ),
-                center: .center,
-                startRadius: 50,
-                endRadius: 400
-            )
-            
-            
-            .ignoresSafeArea()
-            
-            VStack {
-                Text("Qu’aimez-vous faire ?")
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.black)
-                /*  Button(action: addItem) {
-                 Label("Add Folder", systemImage: "folder.badge.plus")
-                 }*/
-                    //Mic
-                MicObjView( fillLevelBinding: $fillLevel)
-                    .padding(.top)
-                Text(isRecording ? textValue: "Parlez")
-                    .font(.title)
-                if !isRecording {
-                    Button {
-                        print("starting speech recognition")
-                        self.textValue = ""
-                        self.spokenText = ""
-                        isRecording = true
-                        speechRecognizer.record(to: $textValue)
-                    } label: {
-                        Text("Start")
+        NavigationStack{
+            ZStack {
+                RadialGradient(
+                    gradient: Gradient(colors: [
+                        .white,
+                        .orange.opacity(0.1),
+                        .orange.opacity(0.4)
+                    ]
+                                       
+                    ),
+                    center: .center,
+                    startRadius: 50,
+                    endRadius: 400
+                )
+                
+                
+                .ignoresSafeArea()
+                
+                VStack {
+                    Text("Qu’aimez-vous faire ?")
+                        .font(.largeTitle)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.black)
+                    /*  Button(action: addItem) {
+                     Label("Add Folder", systemImage: "folder.badge.plus")
+                     }*/
+                        //Mic
+                    MicObjView( fillLevelBinding: $fillLevel)
+                        .padding(.top)
+                    Text(isRecording ? textValue: "Parlez")
+                        .font(.title)
+                    if !isRecording {
+                        Button {
+                            print("starting speech recognition")
+                            self.textValue = ""
+                            self.spokenText = ""
+                            isRecording = true
+                            speechRecognizer.record(to: $textValue)
+                        } label: {
+                            Text("Appuez içi pour commencer")
+                                .foregroundColor(.black)
+                                .padding()
+                        }
+                    } else {
+                        Button {
+                            print("stopping speech recognition")
+                            isRecording = false
+                            spokenText = textValue
+                            speechRecognizer.stopRecording()
+                            textValue = "Press start to record speech..."
+                            print(spokenText)
+                        } label: {
+                            Text("Stop")
+                                .foregroundColor(.black)
+                            
+                        }
                     }
-                } else {
-                    Button {
-                        print("stopping speech recognition")
-                        isRecording = false
-                        spokenText = textValue
-                        speechRecognizer.stopRecording()
-                        textValue = "Press start to record speech..."
-                        print(spokenText)
-                    } label: {
-                        Text("Stop")
+                    if !isRecording {
+                        Text(spokenText)
+                        /* NavigationLink("Stop", destination: SearchView())*/
                     }
                 }
-                if !isRecording {
-                    Text(spokenText)
-                }
-            }
                 
                 
                 
             }
-            
+
+        }
             
         }
         

@@ -68,8 +68,11 @@ struct EntryView: View {
                                 .focused($isFocused)
                                 .keyboardType(.emailAddress)
                                 .transition(.scale.combined(with: .opacity))
+                            
+                            /* NavigationLink(destination: MicrophoneView())*/
                         }
                     }
+                      
                     NavigationLink(destination: MicrophoneView()) {
                         
                         VStack {
