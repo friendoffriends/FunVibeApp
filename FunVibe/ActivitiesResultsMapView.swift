@@ -1,25 +1,17 @@
 //
-//  MapView.swift
-//  FunVibeApp
-//
-//  Created by Apprenant 84 on 12/10/25.
-//
-
-//
-//  MapView.swift
+//  ActivitiesResultsMapView.swift
 //  FunVibe
 //
 //  Created by Apprenant 84 on 12/15/25.
 //
 
 // v2.1 test for addresses
-/*
 import SwiftUI
 import MapKit
 import CoreLocation
 
 /// iOS 17+ (non-deprecated) SwiftUI Map that geocodes each Activity.location (Address) and shows pins.
-struct MapView: View {
+struct ActivitiesResultsMapView: View {
     @State private var results: [Activity] = funvibes // Should this be private or public?
 
     @State private var cameraPosition: MapCameraPosition = .region(Self.defaultRegion)
@@ -187,16 +179,15 @@ private extension CLGeocoder {
         }
     }
 }
-*/
- 
-// v2
 
+// v2
+/*
 import SwiftUI
 import MapKit
 import CoreLocation
 
 /// iOS 17+ (non-deprecated) SwiftUI Map that geocodes each Activity.location (Address) and shows pins.
-struct MapView: View {
+struct ActivitiesResultsMapView: View {
     @State private var results: [Activity] = funvibes // Should this be private or public?
 
     @State private var cameraPosition: MapCameraPosition = .region(Self.defaultRegion)
@@ -406,6 +397,7 @@ private extension CLGeocoder {
     }
 }
 
+*/
 
 
 // v1
@@ -415,7 +407,7 @@ import MapKit
 import CoreLocation
 
 /// Map view that geocodes each Activity.location (Address) and displays pins.
-struct MapView: View {
+struct ActivitiesResultsMapView: View {
     // previous version
     /*
     var results: [Activity]
@@ -603,41 +595,3 @@ private extension Address {
     }
 }
 */
-
-
-
-
-
-
-
-// v0
-/*
-import SwiftUI
-import MapKit
-
-// This View takes in the list results and shows them on the map.
-
-struct MapView: View {
-    @State private var cameraPosition: MapCameraPosition = .region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(
-                latitude: 43.6047,   // Toulouse
-                longitude: 1.4442
-            ),
-            span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        )
-    )
-
-    var body: some View {
-        Map(position: $cameraPosition) {
-            // add markers later if you want
-        }
-        .ignoresSafeArea()
-    }
-}
-*/
-
-#Preview {
-    MapView()
-}
-

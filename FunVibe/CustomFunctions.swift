@@ -16,4 +16,10 @@ func dateFormat(date:Date)-> String{
     return dateFormatter.string(from: date)
     }
 
-
+func timeFormat(date:Date)-> String{
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .none
+    dateFormatter.timeStyle = .short
+    dateFormatter.locale = Locale(identifier: "fr_FR")
+    return dateFormatter.string(from: date)
+}
