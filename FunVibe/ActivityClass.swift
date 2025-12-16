@@ -5,6 +5,10 @@
 //  Created by Apprenant 78 on 12/12/2025.
 //
 
+// This is not used
+
+
+
 import Foundation
 
 class Activity: Identifiable {
