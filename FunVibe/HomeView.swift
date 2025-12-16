@@ -9,13 +9,13 @@ import SwiftUI
 
 struct HomeView: View {
     var userLoginStatus: Bool = UserDefaults.standard.bool(forKey: "isLoggedIn")
+    @State var searchTextVar: String = ""
 
     var body: some View {
         ZStack {
 
             TabView {
-
-                ExploreView()
+                ExploreView(searchText: searchTextVar)
                     .tabItem {
                         Label("", systemImage: "house")
                     }
