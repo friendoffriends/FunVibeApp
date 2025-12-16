@@ -30,11 +30,11 @@ var addresses: [Address] = [
 
 
 /// USER //////////////////////////////////
-var john = User(fullName: "John", email: "john@example.com", phoneNumber:"0753445645" ,password: "password1234", address: johnAddress)
-var ben = User(fullName: "Ben", email: "ben@example.com", phoneNumber:"0753445645" ,password: "password2345", address: benAddress)
-var kevin = User(fullName: "Kevin", email: "kevin@example.com", phoneNumber:"0753445645" ,password: "password3456", address: kevinAddress)
-var martha = User(fullName: "Martha", email: "marth@example.com", phoneNumber:"0753445645" ,password: "password4567", address: marthaAddress)
-var jane = User(fullName: "Jane", email: "jane@example.com", phoneNumber:"0753445645" ,password: "password5678", address: janeAddress)
+var john = User(fullName: "John", email: "john@gmail.com", phoneNumber:"0753445645" ,password: "password1234", address: johnAddress)
+var ben = User(fullName: "Ben", email: "ben@outlook.com", phoneNumber:"0753445645" ,password: "password2345", address: benAddress)
+var kevin = User(fullName: "Kevin", email: "kevin@google.com", phoneNumber:"0753445645" ,password: "password3456", address: kevinAddress)
+var martha = User(fullName: "Martha", email: "marth@yahoo.com", phoneNumber:"0753445645" ,password: "password4567", address: marthaAddress)
+var jane = User(fullName: "Jane", email: "jane@sfr.fr", phoneNumber:"0753445645" ,password: "password5678", address: janeAddress)
 
 
 var users: [User] = [john, ben, kevin, martha, jane]

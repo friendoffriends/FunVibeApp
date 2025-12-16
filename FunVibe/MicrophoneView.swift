@@ -82,7 +82,10 @@ struct MicrophoneView: View {
                     }
                     if !isRecording {
                         Text(spokenText)
-                        /* NavigationLink("Stop", destination: SearchView())*/
+                        NavigationLink(
+                            "Stop",
+                            destination: HomeView(searchBinding: spokenText)
+                        )
                     }
                 }
                 

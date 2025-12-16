@@ -7,6 +7,7 @@
 
 
 import Foundation
+import SwiftUI
 
 func dateFormat(date:Date)-> String{
     let dateFormatter = DateFormatter()
@@ -22,4 +23,24 @@ func timeFormat(date:Date)-> String{
     dateFormatter.timeStyle = .short
     dateFormatter.locale = Locale(identifier: "fr_FR")
     return dateFormatter.string(from: date)
+}
+
+func setLogout() -> Void {
+    UserDefaults.standard.set(false, forKey: "isLoggedIn")
+    UserDefaults.standard.set(false, forKey: "isAdmin")
+    }
+
+
+func findUser(email:String)->User?{
+    for user in users {
+        if user.email == email{
+            return user
+        }
+    }
+    return nil
+}
+
+func findUserPassword(email:String, password:String)->Bool?{
+    let user = findUser(email:email)
+    return user?.password == password ? true : false
 }

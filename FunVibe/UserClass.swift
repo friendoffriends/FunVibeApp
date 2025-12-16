@@ -8,7 +8,7 @@
 import Foundation
 
  class User: Identifiable {
-     var id: UUID
+     //var id: UUID
      var fullName: String
      var email: String
      var phoneNumber: String?
@@ -19,7 +19,7 @@ import Foundation
     var publicProfile = false
 
     init(fullName: String, email: String, phoneNumber: String? = nil, password: String, address: Address, notificationsOn: Bool? = nil, publicProfile: Bool = false) {
-         self.id = UUID()
+         //self.id = UUID()
          self.fullName = fullName
          self.email = email
          self.phoneNumber = phoneNumber

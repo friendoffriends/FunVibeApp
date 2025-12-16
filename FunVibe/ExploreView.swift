@@ -11,14 +11,13 @@ struct ExploreView: View {
     @State var searchText: String = ""
 
     var body: some View {
-        ZStack {
-            //Backgroound
-            Image("Background")
-                .resizable()
-                .opacity(0.5)
-
-            //Content
             NavigationStack {
+                ZStack {
+                    //Backgroound
+                    Image("Background")
+                        .resizable()
+                        .opacity(0.5)
+                    //Content
                 ScrollView(.vertical){
                     VStack (alignment:.leading){
                         RoundedRectangle(cornerRadius: 20)

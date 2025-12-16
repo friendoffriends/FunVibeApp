@@ -160,7 +160,8 @@ struct CreateUserView: View {
                 }
                 .padding()
                 .navigationDestination(isPresented: $isCreated) {
-                    EditUserView() // Replace with your login/entry view
+                    //EditUserView() // Replace with your login/entry view
+                    UserLoginView()
                 }
             }
         }
@@ -202,6 +203,18 @@ struct CreateUserView: View {
         if let img = image {
             saveImage(img)
         }
+
+        //init(fullName: String, email: String, phoneNumber: String? = nil, password: String, address: Address, notificationsOn: Bool? = nil, publicProfile: Bool = false)
+        let user = User(
+            fullName: fullName,
+            email: email,
+            phoneNumber: phoneNumber,
+            password: "password",
+            address: Address(street:"", city: city, postCode: ""),
+            notificationsOn: notificationsOn,
+            publicProfile: publicProfile
+        )
+        users.append(user)
     }
     
     private func loadProfile() {

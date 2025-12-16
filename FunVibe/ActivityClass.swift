@@ -8,7 +8,7 @@
 import Foundation
 
 class Activity: Identifiable {
-    var id: UUID = UUID()
+    //var id: UUID
     var title: String
     var date: Date
     var location: Address
@@ -19,7 +19,7 @@ class Activity: Identifiable {
     var participants: [User]? = []
 
     init(title: String, date: Date, location: Address, description: String, image: String?, type: ActivityType, organiser: User, participants: [User]?) {
-        self.id = UUID()
+        //self.id = UUID()
         self.title = title
         self.date = date
         self.location = location
