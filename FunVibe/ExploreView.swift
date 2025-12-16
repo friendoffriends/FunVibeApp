@@ -28,7 +28,7 @@ struct ExploreView: View {
 
                         ForEach (funvibes) { activity in
                             NavigationLink {
-                                //
+                                IndividualEventView(individualEvent: activity)
                             } label: {
                                 HStack {
                                     if activity.image == "" {
