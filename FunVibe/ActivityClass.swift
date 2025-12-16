@@ -5,10 +5,14 @@
 //  Created by Apprenant 78 on 12/12/2025.
 //
 
+// This is not used
+
+
+
 import Foundation
 
 class Activity: Identifiable {
-    var id: UUID = UUID()
+    var id: UUID
     var title: String
     var date: Date
     var location: Address

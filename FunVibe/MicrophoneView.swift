@@ -83,11 +83,10 @@ struct MicrophoneView: View {
                     if !isRecording {
                         Text(spokenText)
                             .padding(10)
+                        
                         NavigationLink(
-                            "Allez",
-                            destination: HomeView(
-                                searchTextVar: spokenText
-                            ).font(.title)
+                            "Stop",
+                            destination: HomeView()
                         )
                     }
                 }

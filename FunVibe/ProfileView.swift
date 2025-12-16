@@ -29,7 +29,7 @@ struct ProfileView: View {
 
                             .padding(20)
 
-                        NavigationLink(destination: ExploreView()) {
+                        NavigationLink(destination: UserLoginView()) {
                             Image(systemName: "person.slash")
                                 .font(Font.title.bold()).foregroundColor(.orange)
                         }.simultaneousGesture(TapGesture().onEnded {
@@ -37,18 +37,12 @@ struct ProfileView: View {
                         })
                     }
                 }
-
-
             }
             .ignoresSafeArea(edges: .all)
             .navigationBarTitle("Profile")
 
         }
 
-    }
-
-    func setLogout() -> Void {
-        UserDefaults.standard.set(false, forKey: "isLoggedIn")
     }
 }
 

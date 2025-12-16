@@ -47,7 +47,8 @@ struct CreateUserView: View {
     
     @State private var showCreatedAlert = false
     @State private var navigateToEdit = false
-    
+    @State private var isCreated: Bool = false
+
         // Keys for UserDefaults
     private let profileImageFileName = "profile.jpg"
     private let fullNameKey = "fullName"
@@ -132,34 +133,9 @@ struct CreateUserView: View {
                     Spacer()
                 }
                 .padding()
-            }
-            .navigationTitle("Nouveau Profil")
-            .sheet(isPresented: $showCreatedAlert) {
-                    // Custom alert style
-                VStack(spacing: 30) {
-                    Text("🎉 Profil créé avec succès ! 🎉")
-                        .font(.system(size: 28, weight: .bold))
-                        .multilineTextAlignment(.center)
-                        .padding()
-                    
-                    Text("Vous pouvez maintenant compléter votre profil dans EditUserView.")
-                        .font(.title3)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                    
-                    Button(action: {
-                        showCreatedAlert = false
-                        navigateToEdit = true
-                    }) {
-                        Text("Aller au profil")
-                            .font(.title2)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.orange)
-                            .cornerRadius(15)
-                    }
-                    .padding(.horizontal, 40)
+                .navigationDestination(isPresented: $isCreated) {
+                    //EditUserView() // Replace with your login/entry view
+                    UserLoginView()
                 }
                 .presentationDetents([.fraction(0.5)])
             }
@@ -192,6 +168,20 @@ struct CreateUserView: View {
         if let img = image {
             saveImage(img)
         }
+
+        isCreated = true
+
+        //init(fullName: String, email: String, phoneNumber: String? = nil, password: String, address: Address, notificationsOn: Bool? = nil, publicProfile: Bool = false)
+        let user = User(
+            fullName: fullName,
+            email: email,
+            phoneNumber: phoneNumber,
+            password: "password",
+            address: Address(street:"", city: city, postCode: ""),
+            notificationsOn: notificationsOn,
+            publicProfile: publicProfile
+        )
+        users.append(user)
     }
 }
 

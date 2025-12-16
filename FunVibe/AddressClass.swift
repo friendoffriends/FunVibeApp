@@ -8,7 +8,7 @@
 import Foundation
 
 class Address: Identifiable {
-    var id: UUID = UUID()
+    var id: UUID
     var street: String?
     var city: String?
     var postCode: String?

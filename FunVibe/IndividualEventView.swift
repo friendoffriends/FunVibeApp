@@ -1,23 +1,28 @@
 //
-//  HomeView.swift
+//  IndividualEventView.swift
 //  FunVibe
 //
-//  Created by Apprenant 78 on 10/12/2025.
+//  Created by Apprenant 84 on 12/16/25.
 //
 
+// Chris to finish the View 16-12-25 
+
+/*
+
+import Foundation
 import SwiftUI
 
-struct ExploreView: View {
-    @State var searchText: String = ""
-
+struct IndividualEventView(Activity individualEvent): View {
+//    @State var searchText: String = ""
     var body: some View {
+        ZStack {
+            //Backgroound
+            Image("Background")
+                .resizable()
+                .opacity(0.5)
+
+            //Content
             NavigationStack {
-                ZStack {
-                    //Backgroound
-                    Image("Background")
-                        .resizable()
-                        .opacity(0.5)
-                    //Content
                 ScrollView(.vertical){
                     VStack (alignment:.leading){
                         RoundedRectangle(cornerRadius: 20)
@@ -26,12 +31,12 @@ struct ExploreView: View {
                             .padding(5)
                             .shadow(color: .blue.opacity(0.3), radius: 10,x: 0,y: 5)
 
-                        ForEach (funvibes) { activity in
-                            NavigationLink {
-                                //
-                            } label: {
+//                        ForEach (funvibes) { activity in
+//                            NavigationLink {
+//                                //
+//                            } label: {
                                 HStack {
-                                    if activity.image == "" {
+                                    if individualEvent.image == "" {
                                         Image(systemName: "photo.fill")
                                             .resizable()
                                             .frame(width: 80, height: 80)
@@ -41,7 +46,7 @@ struct ExploreView: View {
                                             .padding(.leading)
                                     }
                                     else{
-                                        Image(activity.image!)
+                                        Image(individualEvent.image!)
                                             .resizable()
                                             .frame(width: 80, height: 80)
                                             .clipShape(Circle())
@@ -51,28 +56,28 @@ struct ExploreView: View {
                                     }
 
                                     VStack(alignment: .leading){
-                                        Text(activity.title)
+                                        Text(individualEvent.title)
                                             .font(Font.headline.bold())
-                                        Text(activity.description)
-                                            .font(.title3)
+                                        Text(individualEvent.description)
+                                            .font(.subheadline)
                                             .multilineTextAlignment(.leading)
-                                            .lineLimit(1)
+                                            .lineLimit(2)
                                         HStack{
                                             Spacer()
-                                            Text(dateFormat(date: activity.date)).italic()
+                                            Text(dateFormat(date: individualEvent.date)).italic()
                                             Spacer()
-                                            Text(timeFormat(date: activity.date)).italic()
+                                            Text(timeFormat(date: individualEvent.date)).italic()
                                             Spacer()
-                                            //Text(activity.category.rawValue.capitalized)
+                                            //Text(individualEvent.category.rawValue.capitalized)
                                               //  .font(Font.caption).italic()
                                         }
                                         Text("Participants : ")
                                             .font(Font.caption).italic()
-                                        //Text(activity.participants.count)
+                                        //Text(individualEvent.participants.count)
 
                                     }
                                     .padding(20)
-                                }
+//                                }
                                 .foregroundColor(.orange)
                                 .background(
                                     Color.white
@@ -95,7 +100,7 @@ struct ExploreView: View {
                 .searchable(text: $searchText)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink(destination: AddActivityView()) {
+                        NavigationLink(destination: AddindividualEventView()) {
                                 Image(systemName: "plus.circle")
                                 .font(Font.title.bold()).foregroundColor(.orange)
                         }
@@ -117,5 +122,6 @@ struct ExploreView: View {
 }
 
 #Preview {
-    ExploreView(searchText: "")
+    IndividualEventView()
 }
+ */

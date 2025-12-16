@@ -10,8 +10,10 @@ import SwiftUI
 struct UserLoginView: View {
 
     @AppStorage("isLoggedIn") private var isLoggedIn = false
+    @AppStorage("isAdmin") private var isAdmin: Bool = false
     @State private var username = ""
     @State private var password = ""
+    //@State private var isAdmin: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -23,13 +25,18 @@ struct UserLoginView: View {
                     .opacity(0.5)
                     .edgesIgnoringSafeArea(.all)
 
-
-                if isLoggedIn {
                 //if UserDefaults.standard.bool(forKey: "isLoggedIn")==true {
-                    NavigationLink(
-                        destination: ProfileView()) {
-                            Text("Continue to your profile")
+                if isLoggedIn {
+                        if isAdmin==true {
+                            NavigationLink(destination: AdminView()) {
+                                Text("Continue to Admin profile")
+                            }
+                        } else {
+                            NavigationLink(destination: ProfileView()) {
+                                Text("Continue to your profile")
+                            }
                         }
+
                 } else {
                     VStack {
                         TextField("Nom d'utilisateur", text: $username)
@@ -81,15 +88,30 @@ struct UserLoginView: View {
                 }
             }
         }
-
     }
 
     private func authenticateUser() {
-        if username == "admin" && password == "password" {
+        if findUser(email: username) != nil {
+            if findUserPassword(email: username, password: password) ?? false{
+                isLoggedIn = true
+                $username.wrappedValue = ""
+                $password.wrappedValue = ""
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                UserDefaults.standard.set(false, forKey: "isAdmin")
+            }
+            else{
+                print("Invalid credentials")
+            }
+        }
+        else if username == "admin" && password == "password" {
             isLoggedIn = true
             $username.wrappedValue = ""
             $password.wrappedValue = ""
             UserDefaults.standard.set(true, forKey: "isLoggedIn")
+            UserDefaults.standard.set(true, forKey: "isAdmin")
+        }
+        else {
+            print("Invalid credentials")
         }
     }
 }

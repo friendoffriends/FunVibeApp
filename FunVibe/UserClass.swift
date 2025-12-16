@@ -15,8 +15,8 @@ import Foundation
      var password: String
      var address: Address
     //var city : String
-     var notificationsOn: Bool? = false
-    var publicProfile = false
+      var notificationsOn: Bool? = false
+      var publicProfile = false
 
     init(fullName: String, email: String, phoneNumber: String? = nil, password: String, address: Address, notificationsOn: Bool? = nil, publicProfile: Bool = false) {
          self.id = UUID()
