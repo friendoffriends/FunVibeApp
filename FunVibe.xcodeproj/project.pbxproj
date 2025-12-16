@@ -14,29 +14,17 @@
 		7F4660692EED5BC4009210F0 /* Exceptions for "FunVibe" folder in "FunVibe" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				.swift,
 				Info.plist,
 			);
 			target = AF5B25CF2EE971E3001A6A4A /* FunVibe */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		7F548FE72EF0A0F9009AEA19 /* Exceptions for "FunVibe" folder in "Compile Sources" phase from "FunVibe" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = AF5B25CC2EE971E3001A6A4A /* Sources */;
-			membershipExceptions = (
-				.swift,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AF5B25D22EE971E3001A6A4A /* FunVibe */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				7F4660692EED5BC4009210F0 /* Exceptions for "FunVibe" folder in "FunVibe" target */,
-				7F548FE72EF0A0F9009AEA19 /* Exceptions for "FunVibe" folder in "Compile Sources" phase from "FunVibe" target */,
 			);
 			path = FunVibe;
 			sourceTree = "<group>";
@@ -285,7 +273,7 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = vc;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = PHotoAdition;
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = imagepicker;
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = vc;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -325,7 +313,7 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = vc;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = PHotoAdition;
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = imagepicker;
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = vc;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

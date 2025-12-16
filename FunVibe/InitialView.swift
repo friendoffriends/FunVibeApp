@@ -13,7 +13,7 @@ struct InitialView: View {
 
     var body: some View {
         if (UserDefaults.standard.bool(forKey: "isLoggedIn") == true ) {
-            HomeView(searchBinding: "")
+            HomeView()
         } else {
             EntryView()
         }

@@ -47,7 +47,8 @@ struct CreateUserView: View {
     
     @State private var showCreatedAlert = false
     @State private var navigateToEdit = false
-    
+    @State private var isCreated: Bool = false
+
         // Keys for UserDefaults
     private let profileImageFileName = "profile.jpg"
     private let fullNameKey = "fullName"
@@ -167,6 +168,8 @@ struct CreateUserView: View {
         if let img = image {
             saveImage(img)
         }
+
+        isCreated = true
 
         //init(fullName: String, email: String, phoneNumber: String? = nil, password: String, address: Address, notificationsOn: Bool? = nil, publicProfile: Bool = false)
         let user = User(

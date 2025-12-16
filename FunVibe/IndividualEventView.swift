@@ -124,4 +124,4 @@ struct IndividualEventView(Activity individualEvent): View {
 #Preview {
     IndividualEventView()
 }
-/*
+ */

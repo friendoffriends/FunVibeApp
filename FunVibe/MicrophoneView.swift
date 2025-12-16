@@ -84,7 +84,7 @@ struct MicrophoneView: View {
                         Text(spokenText)
                         NavigationLink(
                             "Stop",
-                            destination: HomeView(searchBinding: spokenText)
+                            destination: HomeView()
                         )
                     }
                 }
