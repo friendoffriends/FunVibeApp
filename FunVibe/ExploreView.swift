@@ -55,9 +55,9 @@ struct ExploreView: View {
                                         Text(activity.title)
                                             .font(Font.headline.bold())
                                         Text(activity.description)
-                                            .font(.subheadline)
+                                            .font(.title3)
                                             .multilineTextAlignment(.leading)
-                                            .lineLimit(2)
+                                            .lineLimit(1)
                                         HStack{
                                             Spacer()
                                             Text(dateFormat(date: activity.date)).italic()

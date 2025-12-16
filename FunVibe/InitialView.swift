@@ -12,7 +12,7 @@ struct InitialView: View {
     //@Environment(\.isLoggedIn) private var isLoggedIn
 
     var body: some View {
-        if (UserDefaults.standard.bool(forKey: "isLoggedIn") != true ) {
+        if (UserDefaults.standard.bool(forKey: "isLoggedIn") == true ) {
             HomeView()
         } else {
             EntryView()

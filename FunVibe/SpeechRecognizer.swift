@@ -47,27 +47,27 @@ struct SpeechRecognizer {
      - speech: A binding to a string where the transcription is written.
      */
     func record(to speech: Binding<String>) {
-        relay(speech, message: "Requesting access")
+        relay(speech, message: "Demande d'accés ")
         canAccess { authorized in
             guard authorized else {
-                relay(speech, message: "Access denied")
+                relay(speech, message: "Accées refusé")
                 return
             }
 
-            relay(speech, message: "Access granted")
+            relay(speech, message: "Accés garantie")
 
             assistant.audioEngine = AVAudioEngine()
             guard let audioEngine = assistant.audioEngine else {
-                fatalError("Unable to create audio engine")
+                fatalError("Impossible de créer le moteur audio")
             }
             assistant.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
             guard let recognitionRequest = assistant.recognitionRequest else {
-                fatalError("Unable to create request")
+                fatalError("Impossible de créer la demande")
             }
             recognitionRequest.shouldReportPartialResults = true
 
             do {
-                relay(speech, message: "Booting audio subsystem")
+                relay(speech, message: "Démarrage de système audio")
 
                 let audioSession = AVAudioSession.sharedInstance()
                 try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
@@ -79,7 +79,7 @@ struct SpeechRecognizer {
                 inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
                     recognitionRequest.append(buffer)
                 }
-                relay(speech, message: "Preparing audio engine")
+                relay(speech, message: "En cours..")
                 audioEngine.prepare()
                 try audioEngine.start()
                 assistant.recognitionTask = assistant.speechRecognizer?.recognitionTask(with: recognitionRequest) { (result, error) in
@@ -96,7 +96,7 @@ struct SpeechRecognizer {
                     }
                 }
             } catch {
-                print("Error transcribing audio: " + error.localizedDescription)
+                print("Erreur de transcription  audio: " + error.localizedDescription)
                 assistant.reset()
             }
         }

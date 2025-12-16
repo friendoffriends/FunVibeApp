@@ -12,7 +12,7 @@ import UIKit
 struct ImagePicker: UIViewControllerRepresentable {
     
     @Binding var image: UIImage?
-    var onImagePicked: ((UIImage) -> Void)? = nil // ✅ closure to save image
+    var onImagePicked: ((UIImage) -> Void)? = nil // closure to save image
     @Environment(\.dismiss) var dismiss
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
@@ -42,7 +42,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         ) {
             if let selectedImage = info[.originalImage] as? UIImage {
                 parent.image = selectedImage
-                parent.onImagePicked?(selectedImage) // ✅ save immediately
+                parent.onImagePicked?(selectedImage) // save file
             }
             parent.dismiss()
         }
