@@ -18,11 +18,16 @@ struct IndividualEventView: View {
             Image("Background")
                 .resizable()
                 .opacity(0.5)
+                .ignoresSafeArea(edges: .all)
 
             //Content
             NavigationStack {
                 ScrollView(.vertical){
                     VStack (alignment:.leading){
+                        Text(individualEvent.title).font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundColor(.orange)
+                            .padding(.leading)
                         if individualEvent.image == "" {
                             Image(systemName: "photo.fill")
                                 .resizable()
@@ -41,13 +46,21 @@ struct IndividualEventView: View {
                                 .padding(5)
                         }
                         HStack{
-                            Spacer()
                             Text(dateFormat(date: individualEvent.date)).italic()
-                            Spacer()
+                                .font(.system(size: 18))
+                                .padding(5)
+                                .padding(.leading, 10)
                             Text(timeFormat(date: individualEvent.date)).italic()
-                            Spacer()
-                            //Text(individualEvent.category.rawValue.capitalized)
+                                .font(.system(size: 18))
+                                .padding(.leading, 10)
+//                            Text(individualEvent.category.rawValue.capitalized)
                               //  .font(Font.caption).italic()
+                            Text("Participants : ").italic()
+                                    .font(.system(size: 18))
+                                    .padding(.leading, 20)
+                            Text("\(individualEvent.participants?.count ?? 0)").italic()
+                                .font(.system(size: 18))
+                                .padding(.leading, 0)
                         }
                         .foregroundColor(.orange)
                         .background(
@@ -67,20 +80,18 @@ struct IndividualEventView: View {
 //                            NavigationLink {
 //                                //
 //                            } label: {
-                                HStack {
-                                    VStack(alignment: .leading){
+                                VStack(alignment: .leading){
+                                    HStack{
                                         Text(individualEvent.description)
-                                            .font(.subheadline)
+    //                                            .font(.subheadline)
+                                            .font(.system(size: 16))
                                             .multilineTextAlignment(.leading)
-                                            .lineLimit(2)
-                                      
-                                        Text("Participants : ")
-                                            .font(Font.caption).italic()
-                                        //Text(individualEvent.participants.count)
-
+                                            .lineLimit(12)
+                                            // changed from 2 to 12
+                                        Spacer()
                                     }
                                     .padding(20)
-//                                }
+    //                                }
                                 .foregroundColor(.orange)
                                 .background(
                                     Color.white
@@ -92,32 +103,33 @@ struct IndividualEventView: View {
                                             x:0, y:10
                                         )
                                 )
-                            }
-                        }
+                                    }
+                                    
+                        
+                    }
                 }
                 .padding(5)
-                .navigationTitle(individualEvent.title)
                 
             }
             
             // What is the following? Can I delete it?
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: AddActivityView()) {
-                            Image(systemName: "plus.circle")
-                            .font(Font.title.bold()).foregroundColor(.orange)
-                    }
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: MapView()) {
-                        Image(systemName: "map.circle")
-                            .font(Font.title.bold()).foregroundColor(.orange)
-                    }
-
-                }
-            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    NavigationLink(destination: AddActivityView()) {
+//                            Image(systemName: "plus.circle")
+//                            .font(Font.title.bold()).foregroundColor(.orange)
+//                    }
+//                }
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    NavigationLink(destination: MapView()) {
+//                        Image(systemName: "map.circle")
+//                            .font(Font.title.bold()).foregroundColor(.orange)
+//                    }
+//
+//                }
+//            }
         }
-        .ignoresSafeArea(edges: .all)
+        
 
     }
 }
