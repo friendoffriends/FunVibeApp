@@ -32,32 +32,50 @@ struct UserLoginView: View {
                         }
                 } else {
                     VStack {
-                        TextField("Username", text: $username)
-                            .frame(width: 300)
+                        TextField("Nom d'utilisateur", text: $username)
+                            .frame(width: 300, )
+
+                            .font(.title2)
+                            .padding(.trailing, 30)
+                            .padding()
+                            .background(Color.white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(Color.orange, lineWidth: 2))
+                            .cornerRadius(12)
+                        SecureField("Mot de passe", text: $password)
+                            .frame(width: 330, )
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .autocapitalization(.none)
+                            .font(.title2)
                             .padding()
-                        SecureField("Password", text: $password)
-                            .frame(width: 300)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .autocapitalization(.none)
-                            .padding()
+                            .background(Color.white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(Color.orange, lineWidth: 2))
+                            .cornerRadius(12)
                         Button("Login") {
                             authenticateUser()
 
                         }.disabled(username.isEmpty || password.isEmpty)
                             .padding()
                             .buttonStyle(PlainButtonStyle())
-                            .frame(maxWidth: 150, maxHeight: 40)
+                            .frame(maxWidth: 150, maxHeight: 60)
                             .background(Color(.systemGray6))
                             .cornerRadius(20)
 
                         .padding(.bottom, 50)
 
-                        NavigationLink(
-                            destination: CreateUserView()) {
-                                Text("Créer un compte")
-                            }
+                        NavigationLink(destination: CreateUserView()) {
+                            Text("Créer un compte")
+                                .font(.title2)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: 160)
+                                .padding()
+                                .background(Color.blue)
+                                .cornerRadius(10)
+                        }
+
                     }
                     .navigationTitle(Text("Login"))
                 }

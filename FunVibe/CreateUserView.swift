@@ -5,7 +5,32 @@
 //  Created by Apprenant 78 on 12/12/2025.
 //
 
+    //
+    //  AddActivityView.swift
+    //  FunVibe
+    //
+    //  Created by Apprenant 78 on 10/12/2025.
+    //
+
+    //
+    //  AddActivityView.swift
+    //  FunVibe
+    //
+    //  Created by Apprenant 78 on 10/12/2025.
+    //
+    //  CreateUserView.swift
+    //  FunVibe
+    //
+    //  Created by asma taberkokt on 15/12/2025.
+    //
+    //  CreateUserView.swift
+    //  FunVibe
+    //
+    //  Created by asma taberkokt on 15/12/2025.
+    //
+
 import SwiftUI
+import UIKit
 
 struct CreateUserView: View {
     
@@ -20,10 +45,10 @@ struct CreateUserView: View {
     @State private var showImagePicker = false
     @State private var image: UIImage? = nil
     
-    @State private var isCreated = false
-    @State private var showCreateAlert = false
+    @State private var showCreatedAlert = false
+    @State private var navigateToEdit = false
     
-        // MARK:  UserDefaults Keys
+        // Keys for UserDefaults
     private let profileImageFileName = "profile.jpg"
     private let fullNameKey = "fullName"
     private let emailKey = "email"
@@ -37,7 +62,7 @@ struct CreateUserView: View {
             ScrollView {
                 VStack(spacing: 30) {
                     
-                        // MARK: - Profile Image
+                        // Profile Image + Camera
                     ZStack(alignment: .bottomTrailing) {
                         Group {
                             if let image = image {
@@ -66,7 +91,7 @@ struct CreateUserView: View {
                                 .frame(width: 32, height: 32)
                                 .foregroundColor(.white)
                                 .padding(14)
-                                .background(Color.orange)
+                                .background(Color.blue)
                                 .clipShape(Circle())
                                 .shadow(radius: 3)
                         }
@@ -75,59 +100,18 @@ struct CreateUserView: View {
                     .sheet(isPresented: $showImagePicker) {
                         ProfileImagePicker(image: $image, onImagePicked: saveImage)
                     }
-                    .onAppear {
-                        loadProfile()
-                    }
                     
-                    Text("Creez votre profil")
+                    Text("Créer votre profil")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     
-                        // MARK: - Fields
                     VStack(spacing: 20) {
-                        
-                        ProfileField(
-                            icon: "person.fill",
-                            title: "Nom complet",
-                            placeholder: "Nom complet",
-                            text: Binding(
-                                get: { fullName },
-                                set: { fullName = $0 }
-                            )
-                        )
-                        
-                        ProfileField(
-                            icon: "envelope.fill",
-                            title: "Email",
-                            placeholder: "Email",
-                            text: Binding(
-                                get: { email },
-                                set: { email = $0 }
-                            )
-                        )
-                        
-                        ProfileField(
-                            icon: "house.fill",
-                            title: "Ville",
-                            placeholder: "Ville",
-                            text: Binding(
-                                get: { city },
-                                set: { city = $0 }
-                            )
-                        )
-                        
-                        ProfileField(
-                            icon: "phone.fill",
-                            title: "Téléphone",
-                            placeholder: "Téléphone",
-                            text: Binding(
-                                get: { phoneNumber },
-                                set: { phoneNumber = $0 }
-                            )
-                        )
+                        ProfileField(icon: "person.fill", title: "Nom complet", placeholder: "Nom complet", text: $fullName)
+                        ProfileField(icon: "envelope.fill", title: "Email", placeholder: "Email", text: $email)
+                        ProfileField(icon: "house.fill", title: "Ville", placeholder: "Ville", text: $city)
+                        ProfileField(icon: "phone.fill", title: "Téléphone", placeholder: "Téléphone", text: $phoneNumber)
                     }
                     
-                        // MARK: - Toggles
                     Toggle("Notifications", isOn: $notificationsOn)
                         .font(.title3)
                         .tint(.orange)
@@ -136,40 +120,59 @@ struct CreateUserView: View {
                         .font(.title3)
                         .tint(.orange)
                     
-                        // MARK: - Create Button
-                    Button("Creer mon compte") {
-                        showCreateAlert = true
+                    Button("Créer mon compte") {
+                        saveProfile()
+                        showCreatedAlert = true
                     }
-                    .foregroundColor(.orange)
                     .font(.title2)
                     .padding(.top)
-                    .alert("Création de compte", isPresented: $showCreateAlert) {
-                        
-                        Button("Confirmer") {
-                            saveProfile()
-                            isCreated = true
-                        }
-                        
-                        Button("Annuler", role: .cancel) { }
-                        
-                    } message: {
-                        Text("Votre compte est bien créé")
-                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.orange)
                     
                     Spacer()
                 }
                 .padding()
-                .navigationDestination(isPresented: $isCreated) {
-                    EditUserView() // Replace with your login/entry view
+            }
+            .navigationTitle("Nouveau Profil")
+            .sheet(isPresented: $showCreatedAlert) {
+                    // Custom alert style
+                VStack(spacing: 30) {
+                    Text("🎉 Profil créé avec succès ! 🎉")
+                        .font(.system(size: 28, weight: .bold))
+                        .multilineTextAlignment(.center)
+                        .padding()
+                    
+                    Text("Vous pouvez maintenant compléter votre profil dans EditUserView.")
+                        .font(.title3)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                    
+                    Button(action: {
+                        showCreatedAlert = false
+                        navigateToEdit = true
+                    }) {
+                        Text("Aller au profil")
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.orange)
+                            .cornerRadius(15)
+                    }
+                    .padding(.horizontal, 40)
                 }
+                .presentationDetents([.fraction(0.5)])
+            }
+            .navigationDestination(isPresented: $navigateToEdit) {
+                EditUserView()
             }
         }
     }
     
-        // MARK: - Image Persistence
+        // MARK: - Profile Persistence
     private func getImageURL() -> URL? {
-        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
-            .appendingPathComponent(profileImageFileName)
+        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        return documents?.appendingPathComponent(profileImageFileName)
     }
     
     private func saveImage(_ pickedImage: UIImage) {
@@ -178,19 +181,6 @@ struct CreateUserView: View {
         try? data.write(to: url)
     }
     
-    private func loadImage() {
-        guard let url = getImageURL(),
-              let data = try? Data(contentsOf: url),
-              let savedImage = UIImage(data: data) else { return }
-        image = savedImage
-    }
-    
-    private func deleteImage() {
-        guard let url = getImageURL() else { return }
-        try? FileManager.default.removeItem(at: url)
-    }
-    
-        // MARK: - Profile Persistence
     private func saveProfile() {
         UserDefaults.standard.set(fullName, forKey: fullNameKey)
         UserDefaults.standard.set(email, forKey: emailKey)
@@ -202,16 +192,6 @@ struct CreateUserView: View {
         if let img = image {
             saveImage(img)
         }
-    }
-    
-    private func loadProfile() {
-        fullName = UserDefaults.standard.string(forKey: fullNameKey) ?? ""
-        email = UserDefaults.standard.string(forKey: emailKey) ?? ""
-        city = UserDefaults.standard.string(forKey: cityKey) ?? ""
-        phoneNumber = UserDefaults.standard.string(forKey: phoneKey) ?? ""
-        notificationsOn = UserDefaults.standard.bool(forKey: notificationsKey)
-        publicProfile = UserDefaults.standard.bool(forKey: publicProfileKey)
-        loadImage()
     }
 }
 

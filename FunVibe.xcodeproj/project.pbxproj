@@ -14,17 +14,29 @@
 		7F4660692EED5BC4009210F0 /* Exceptions for "FunVibe" folder in "FunVibe" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				.swift,
 				Info.plist,
 			);
 			target = AF5B25CF2EE971E3001A6A4A /* FunVibe */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		7F548FE72EF0A0F9009AEA19 /* Exceptions for "FunVibe" folder in "Compile Sources" phase from "FunVibe" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = AF5B25CC2EE971E3001A6A4A /* Sources */;
+			membershipExceptions = (
+				.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AF5B25D22EE971E3001A6A4A /* FunVibe */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				7F4660692EED5BC4009210F0 /* Exceptions for "FunVibe" folder in "FunVibe" target */,
+				7F548FE72EF0A0F9009AEA19 /* Exceptions for "FunVibe" folder in "Compile Sources" phase from "FunVibe" target */,
 			);
 			path = FunVibe;
 			sourceTree = "<group>";
@@ -267,6 +279,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FunVibe/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = CameraForImport;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -306,6 +319,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FunVibe/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = CameraForImport;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
