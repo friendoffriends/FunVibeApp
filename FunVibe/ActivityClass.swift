@@ -83,23 +83,23 @@ class Interest: Activity {
 }
 
 
-enum ActivityType: String {
+enum ActivityType: CaseIterable {
     case event, club , interest
 }
 
-enum ClubCategory: String{
+enum ClubCategory: CaseIterable {
     case social_community, health_wellness, hobby_base, learning_intellectual, entertainment, recreation , technology_modern, other
 }
 
-enum EventTheme: String{
+enum EventTheme: CaseIterable {
     case comedy, concert, sports, art_culture, food_drink, family, gaming, other
 }
 
-enum ExperienceLevel: String{
+enum ExperienceLevel: CaseIterable {
     case beginner, novice, intermediate, advanced, expert, master, any
 }
 
-enum DifficultyLevel: String{
+enum DifficultyLevel: CaseIterable {
     case veryeasy, easy, moderate, challenging, hard, extreme, any
 }
 
