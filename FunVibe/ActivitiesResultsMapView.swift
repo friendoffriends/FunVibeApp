@@ -5,6 +5,10 @@
 //  Created by Apprenant 84 on 12/15/25.
 //
 
+// This view is unused
+
+/*
+
 // v2.1 test for addresses
 import SwiftUI
 import MapKit
@@ -594,4 +598,5 @@ private extension Address {
         return parts.joined(separator: ", ")
     }
 }
+*/
 */
