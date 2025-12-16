@@ -69,7 +69,9 @@ struct EntryView: View {
                                 .keyboardType(.emailAddress)
                                 .transition(.scale.combined(with: .opacity))
                             
-                            /* NavigationLink(destination: MicrophoneView())*/
+                            NavigationLink(
+                                "Search", destination: ExploreView(searchText: "club")
+                            )
                         }
                     }
                       
