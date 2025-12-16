@@ -70,6 +70,7 @@ struct ExploreView: View {
                                         }
                                         Text("Participants : ")
                                             .font(Font.caption).italic()
+                                        //activity.participants == [] ? Text(0) : Text(000)
                                         //Text(activity.participants.count)
 
                                     }
