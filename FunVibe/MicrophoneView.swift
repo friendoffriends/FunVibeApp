@@ -56,32 +56,34 @@ struct MicrophoneView: View {
                         .font(.title)
                     if !isRecording {
                         Button {
-                            print("starting speech recognition")
+                            print("comencement de l'utilisation de microphone ")
                             self.textValue = ""
                             self.spokenText = ""
                             isRecording = true
                             speechRecognizer.record(to: $textValue)
                         } label: {
-                            Text("Appuez içi pour commencer")
+                            Text("Appuez içi pour enregistrer")
                                 .foregroundColor(.black)
                                 .padding()
                         }
                     } else {
                         Button {
-                            print("stopping speech recognition")
+                            print("Arret d'utilisation de microphone")
                             isRecording = false
                             spokenText = textValue
                             speechRecognizer.stopRecording()
-                            textValue = "Press start to record speech..."
+                            textValue = "Appuyez next pour terminer .."
                             print(spokenText)
                         } label: {
-                            Text("Stop")
+                            Text("Arretez l'enregistrement")
                                 .foregroundColor(.black)
                             
-                        }
+                        }.padding(10)
                     }
                     if !isRecording {
                         Text(spokenText)
+                            .padding(10)
+                        
                         NavigationLink(
                             "Stop",
                             destination: HomeView()

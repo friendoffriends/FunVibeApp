@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ExploreView: View {
     @State var searchText: String = ""
+    @State private var selectedActivity: Activity?
 
     var body: some View {
             NavigationStack {
@@ -18,27 +19,54 @@ struct ExploreView: View {
                         .resizable()
                         .opacity(0.5)
                     //Content
+                    //changes i made yesterday for navigation on each image
+                    //i just added image shape in label inside navigationlink
+
                 ScrollView(.vertical){
                     VStack (alignment:.leading){
-                        RoundedRectangle(cornerRadius: 20)
-                            .frame(height: 200)
-                            .foregroundColor(.orange.opacity(0.5))
-                            .padding(5)
-                            .shadow(color: .blue.opacity(0.3), radius: 10,x: 0,y: 5)
+                        //carousel for images
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 16) {
+                                ForEach(funvibes) { activity in
+                                    NavigationLink {} label: {
+                                        Image(activity.image ?? "photo")
+                                        
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 320, height: 200)
+                                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                                    }
+                                        .shadow(radius: 5)
+                                        .scrollTargetLayout()
+                                        
+                                        }
+                                }
+                            }
+                            .padding(.horizontal)
+                        }
+                        .scrollTargetBehavior(.viewAligned)
+                        .frame(height: 220)
+
 
                         //ForEach (funvibes) { activity in
                         ForEach(funvibes.filter { searchText.isEmpty || $0.title.localizedCaseInsensitiveContains(searchText) }) { activity in
 
                             NavigationLink {
-                                //
+                                IndividualEventView(individualEvent: activity)
                             } label: {
                                 HStack {
                                     if activity.image == "" {
                                         Image(systemName: "photo.fill")
                                             .resizable()
                                             .frame(width: 80, height: 80)
-                                            .clipShape(Circle())
-                                            .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                                            .clipShape(Rectangle())
+                                            .overlay(
+                                                Rectangle()
+                                                    .stroke(
+                                                        Color.white,
+                                                        lineWidth: 1
+                                                    )
+                                            )
                                             .shadow(radius: 10)
                                             .padding(.leading)
                                     }
@@ -46,8 +74,14 @@ struct ExploreView: View {
                                         Image(activity.image!)
                                             .resizable()
                                             .frame(width: 80, height: 80)
-                                            .clipShape(Circle())
-                                            .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                                            .clipShape(Rectangle())
+                                            .overlay(
+                                                Rectangle()
+                                                    .stroke(
+                                                        Color.white,
+                                                        lineWidth: 1
+                                                    )
+                                            )
                                             .shadow(radius: 10)
                                             .padding(.leading)
                                     }
@@ -56,9 +90,9 @@ struct ExploreView: View {
                                         Text(activity.title)
                                             .font(Font.headline.bold())
                                         Text(activity.description)
-                                            .font(.subheadline)
+                                            .font(.title3)
                                             .multilineTextAlignment(.leading)
-                                            .lineLimit(2)
+                                            .lineLimit(1)
                                         HStack{
                                             Spacer()
                                             Text(dateFormat(date: activity.date)).italic()
@@ -68,11 +102,12 @@ struct ExploreView: View {
                                             //Text(activity.category.rawValue.capitalized)
                                               //  .font(Font.caption).italic()
                                         }
-                                        Text("Participants : ")
-                                            .font(Font.caption).italic()
-                                        //activity.participants == [] ? Text(0) : Text(000)
-                                        //Text(activity.participants.count)
-
+                                        HStack{
+                                            Image(systemName: "person.2.fill")
+                                            Text("Participants : ")
+                                                .font(Font.subheadline).italic()
+                                                //Text(activity.participants.count)
+                                        }
                                     }
                                     .padding(20)
                                 }
@@ -111,13 +146,15 @@ struct ExploreView: View {
 
                     }
                 }
+               
+                }
 
             }
+                
         }
-        .ignoresSafeArea(edges: .all)
 
-    }
-}
+    
+
 
 #Preview {
     ExploreView(searchText: "")
