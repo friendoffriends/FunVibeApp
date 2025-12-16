@@ -26,7 +26,9 @@ struct ExploreView: View {
                             .padding(5)
                             .shadow(color: .blue.opacity(0.3), radius: 10,x: 0,y: 5)
 
-                        ForEach (funvibes) { activity in
+                        //ForEach (funvibes) { activity in
+                        ForEach(funvibes.filter { searchText.isEmpty || $0.title.localizedCaseInsensitiveContains(searchText) }) { activity in
+
                             NavigationLink {
                                 IndividualEventView(individualEvent: activity)
                             } label: {
