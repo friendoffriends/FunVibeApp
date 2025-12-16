@@ -195,7 +195,7 @@ struct EditUserView: View {
         }
     }
     
-        // MARK: - Profile Persistence
+        // Profile Persistence
     
     private func getImageURL() -> URL? {
         let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first

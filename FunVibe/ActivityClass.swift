@@ -17,6 +17,9 @@ class Activity: Identifiable {
     var type: ActivityType
     var organiser: User
     var participants: [User]? = []
+    var imagePath: String?
+
+    
 
     init(title: String, date: Date, location: Address, description: String, image: String?, type: ActivityType, organiser: User, participants: [User]?) {
         //self.id = UUID()
