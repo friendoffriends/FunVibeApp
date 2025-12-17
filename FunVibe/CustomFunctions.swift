@@ -36,6 +36,7 @@ func timeFormat(date:Date)-> String{
 func setLogout() -> Void {
     UserDefaults.standard.set(false, forKey: "isLoggedIn")
     UserDefaults.standard.set(false, forKey: "isAdmin")
+    UserDefaults.standard.set("", forKey: "userRef")
     }
 
 
