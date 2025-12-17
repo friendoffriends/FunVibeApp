@@ -44,7 +44,7 @@ var users: [User] = [john, ben, kevin, martha, jane]
 /// ACTIVITIES /////////////////////////////
 var clubGameNight:Club = Club(
     title: "Game Night",
-    date: Date(),
+    date: saveAsDate(isoDate: "2025-12-27T18:30:00+0100"),
     location: club1Address,
     description: "Join us for a night of epic battles and epic snacks!",
     image:  "Game-Night-image",
@@ -58,7 +58,7 @@ var clubGameNight:Club = Club(
 
 var bookClub:Club = Club(
     title: "Book Club",
-    date: Date(),
+    date: saveAsDate(isoDate: "2025-12-28T17:00:00+0100"),
     location: club2Address,
     description: "Read fascinating books and connect with like-minded people!",
     image:  "Book-Club-image",
@@ -72,7 +72,7 @@ var bookClub:Club = Club(
 
 var eventComedyShow:Event = Event(
     title: "Comedy Show",
-    date: Date(),
+    date: saveAsDate(isoDate: "2025-12-31T18:30:00+0100"),
     location: event1Address,
     description: "Catch a comedy show that will make you laugh out loud!",
     image:  "Comedy-show-image",
@@ -84,7 +84,7 @@ var eventComedyShow:Event = Event(
 
 var majongInterest: Interest = Interest(
     title: "Mahjong Challenge",
-    date: Date(),
+    date: saveAsDate(isoDate: "2026-01-03T15:30:00+0100"),
     location: event2Address,
     description: "Challenge your friends to a game of mahjong!",
     image: "majong-image",

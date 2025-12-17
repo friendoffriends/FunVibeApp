@@ -13,14 +13,16 @@ struct IndividualEventView: View {
 //    @State var searchText: String = ""
     @State var individualEvent: Activity
     var body: some View {
-        ZStack {
-            //Backgroound
-            Image("Background")
-                .resizable()
-                .opacity(0.5)
 
             //Content
             NavigationStack {
+                ZStack {
+                    //Backgroound
+                    Image("Background")
+                        .resizable()
+                        .opacity(0.5)
+                        .ignoresSafeArea(edges: .all)
+
                 ScrollView(.vertical){
                     VStack (alignment:.leading){
                         if individualEvent.image == "" {
@@ -117,7 +119,7 @@ struct IndividualEventView: View {
                 }
             }
         }
-        .ignoresSafeArea(edges: .all)
+
 
     }
 }
