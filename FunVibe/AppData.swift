@@ -50,7 +50,7 @@ var clubGameNight:Club = Club(
     image:  "Game-Night-image",
     type: .club,
     organiser: john,
-    participants: [],
+    participants: [john, ben, kevin],
     category: .hobby_base,
     objective: ["Have fun", "Make new friends"],
     activities: ["Video games", "Board games", "Card games"]
@@ -64,7 +64,7 @@ var bookClub:Club = Club(
     image:  "Book-Club-image",
     type: .club,
     organiser: ben,
-    participants: [],
+    participants: [martha, jane],
     category: .hobby_base,
     objective: ["Read more", "Connect with like-minded people"],
     activities: ["Book clubs", "Reading challenges"]
@@ -78,7 +78,7 @@ var eventComedyShow:Event = Event(
     image:  "Comedy-show-image",
     type: .event,
     organiser: jane,
-    participants: [],
+    participants: [john, ben, kevin],
     theme: .comedy
     )
 
@@ -90,7 +90,7 @@ var majongInterest: Interest = Interest(
     image: "majong-image",
     type: .interest,
     organiser: martha,
-    participants: [],
+    participants: [jane, ben, kevin, john, martha],
     category: "joue de stratégie",
     skillLevel: .any,
     difficultyLevel: .any,

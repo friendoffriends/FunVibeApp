@@ -12,6 +12,238 @@
 //  Created by Apprenant 84 on 12/15/25.
 //
 
+
+// v3 17-12-25
+
+import SwiftUI
+import MapKit
+import CoreLocation
+
+/// iOS 17+ SwiftUI Map that geocodes each Activity.location (Address) and shows pins.
+/// Tap a pin to navigate to IndividualEventView for that Activity.
+struct MapView: View {
+    let results: [Activity]
+
+    @State private var cameraPosition: MapCameraPosition = .region(Self.defaultRegion)
+    @State private var pins: [ActivityPin] = []
+
+    @State private var isGeocoding = false
+    @State private var geocodeCache: [String: CLLocationCoordinate2D] = [:]
+    @State private var failedAddresses: Set<String> = []
+
+    // Navigation selection
+    @State private var selectedActivity: Activity?
+
+    var body: some View {
+        Map(position: $cameraPosition) {
+            ForEach(pins) { pin in
+                Annotation(pin.activity.title, coordinate: pin.coordinate, anchor: .bottom) {
+                    Button {
+                        selectedActivity = pin.activity
+                    } label: {
+                        VStack(spacing: 2) {
+                            Image(systemName: "mappin.circle.fill")
+                                .font(.title2)
+                                .foregroundStyle(.red)
+
+                            Text(pin.activity.title)
+                                .font(.caption2)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 3)
+                                .background(.thinMaterial)
+                                .clipShape(RoundedRectangle(cornerRadius: 6))
+                                .lineLimit(1)
+                        }
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
+        .mapControls {
+            MapCompass()
+            MapScaleView()
+        }
+        .overlay(alignment: .top) {
+            if isGeocoding {
+                ProgressView("Locating activities…")
+                    .padding(10)
+                    .background(.thinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .padding(.top, 12)
+            } else if pins.isEmpty {
+                ContentUnavailableView("No locations to show", systemImage: "map")
+                    .padding(.top, 12)
+            }
+        }
+        .overlay(alignment: .bottom) {
+            if !failedAddresses.isEmpty {
+                Text("Couldn’t locate \(failedAddresses.count) address(es).")
+                    .font(.caption)
+                    .padding(8)
+                    .background(.thinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .padding(.bottom, 12)
+            }
+        }
+        // IMPORTANT: This requires MapView to be inside a NavigationStack somewhere above it.
+        .navigationDestination(item: $selectedActivity) { activity in
+            IndividualEventView(individualEvent: activity)
+        }
+        .task(id: resultsSignature) {
+            await geocodeAndUpdateMap()
+        }
+    }
+
+    // MARK: - Trigger key (reruns when address strings change)
+    private var resultsSignature: String {
+        results
+            .map { "\($0.id.uuidString)|\($0.location.geocodingString ?? "")" }
+            .joined(separator: "||")
+    }
+
+    // MARK: - Geocoding + pins + camera
+
+    private func geocodeAndUpdateMap() async {
+        let pending: [PendingPin] = results.compactMap { activity in
+            guard let addressString = activity.location.geocodingString else { return nil }
+            return PendingPin(activity: activity, addressString: addressString)
+        }
+
+        guard !pending.isEmpty else {
+            await MainActor.run {
+                pins = []
+                cameraPosition = .region(Self.defaultRegion)
+                failedAddresses = []
+                isGeocoding = false
+            }
+            return
+        }
+
+        await MainActor.run { isGeocoding = true }
+
+        // Work on local copies, then commit back to State once.
+        let startingCache = await MainActor.run { geocodeCache }
+        var localCache = startingCache
+        var localFailed: Set<String> = []
+
+        let uniqueAddresses = Array(Set(pending.map(\.addressString))).sorted()
+        let geocoder = CLGeocoder()
+
+        for address in uniqueAddresses {
+            if Task.isCancelled { break }
+            if localCache[address] != nil { continue }
+
+            do {
+                let placemarks = try await geocoder.geocode(address)
+                if let coordinate = placemarks.first?.location?.coordinate {
+                    localCache[address] = coordinate
+                } else {
+                    localFailed.insert(address)
+                }
+            } catch {
+                localFailed.insert(address)
+            }
+
+            // Light pacing helps reduce rate limiting if you have many results.
+            try? await Task.sleep(nanoseconds: 200_000_000)
+        }
+
+        let builtPins: [ActivityPin] = pending.compactMap { p in
+            guard let c = localCache[p.addressString] else { return nil }
+            return ActivityPin(activity: p.activity, coordinate: c)
+        }
+
+        let newRegion = regionToFit(builtPins.map(\.coordinate)) ?? Self.defaultRegion
+
+        await MainActor.run {
+            geocodeCache = localCache
+            failedAddresses = localFailed
+            pins = builtPins
+            cameraPosition = .region(newRegion)
+            isGeocoding = false
+        }
+    }
+
+    // MARK: - Region fitting
+
+    private func regionToFit(_ coordinates: [CLLocationCoordinate2D]) -> MKCoordinateRegion? {
+        guard let first = coordinates.first else { return nil }
+
+        var minLat = first.latitude, maxLat = first.latitude
+        var minLon = first.longitude, maxLon = first.longitude
+
+        for c in coordinates.dropFirst() {
+            minLat = min(minLat, c.latitude)
+            maxLat = max(maxLat, c.latitude)
+            minLon = min(minLon, c.longitude)
+            maxLon = max(maxLon, c.longitude)
+        }
+
+        let center = CLLocationCoordinate2D(
+            latitude: (minLat + maxLat) / 2,
+            longitude: (minLon + maxLon) / 2
+        )
+
+        let latDelta = max(0.02, (maxLat - minLat) * 1.25)
+        let lonDelta = max(0.02, (maxLon - minLon) * 1.25)
+
+        return MKCoordinateRegion(
+            center: center,
+            span: MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta)
+        )
+    }
+
+    private static let defaultRegion = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 43.6047, longitude: 1.4442), // Toulouse fallback
+        span: MKCoordinateSpan(latitudeDelta: 0.15, longitudeDelta: 0.15)
+    )
+}
+
+// MARK: - Helper models
+
+private struct PendingPin {
+    let activity: Activity
+    let addressString: String
+}
+
+private struct ActivityPin: Identifiable {
+    let activity: Activity
+    let coordinate: CLLocationCoordinate2D
+    var id: UUID { activity.id }
+}
+
+// MARK: - Address -> string for geocoding
+
+private extension Address {
+    var geocodingString: String? {
+        let parts = [street, postCode, city]
+            .compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+
+        guard !parts.isEmpty else { return nil }
+        return parts.joined(separator: ", ")
+    }
+}
+
+// MARK: - Async geocoding helper
+
+private extension CLGeocoder {
+    func geocode(_ addressString: String) async throws -> [CLPlacemark] {
+        try await withCheckedThrowingContinuation { continuation in
+            geocodeAddressString(addressString) { placemarks, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(returning: placemarks ?? [])
+                }
+            }
+        }
+    }
+}
+
+// › // i don't know what this is for
+
+
 // v2.1 test for addresses
 /*
 import SwiftUI
@@ -190,18 +422,16 @@ private extension CLGeocoder {
 */
  
 // v2
-
+/*
 import SwiftUI
 import MapKit
 import CoreLocation
 
 /// iOS 17+ (non-deprecated) SwiftUI Map that geocodes each Activity.location (Address) and shows pins.
 struct MapView: View {
-    @State private var results: [Activity] = funvibes // Should this be private or public?
-
+    let results: [Activity]
     @State private var cameraPosition: MapCameraPosition = .region(Self.defaultRegion)
     @State private var pins: [ActivityPin] = []
-
     @State private var isGeocoding = false
     @State private var geocodeCache: [String: CLLocationCoordinate2D] = [:]
     @State private var failedAddresses: Set<String> = []
@@ -209,21 +439,28 @@ struct MapView: View {
     var body: some View {
         Map(position: $cameraPosition) {
             ForEach(pins) { pin in
-                Annotation(pin.title, coordinate: pin.coordinate, anchor: .bottom) {
-                    VStack(spacing: 2) {
-                        Image(systemName: "mappin.circle.fill")
-                            .font(.title2)
-                            .foregroundStyle(.red)
+                
+                    Annotation(pin.title, coordinate: pin.coordinate, anchor: .bottom) {
+                        VStack(spacing: 2) {
+                            Image(systemName: "mappin.circle.fill")
+                                .font(.title2)
+                                .foregroundStyle(.red)
 
-                        Text(pin.title)
-                            .font(.caption2)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 3)
-                            .background(.thinMaterial)
-                            .clipShape(RoundedRectangle(cornerRadius: 6))
-                            .lineLimit(1)
+                            Text(pin.title)
+                                .font(.caption2)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 3)
+                                .background(.thinMaterial)
+                                .clipShape(RoundedRectangle(cornerRadius: 6))
+                                .lineLimit(1)
+                        }
                     }
-                }
+//                NavigationLink {
+//                    // need to redo
+////                    IndividualEventView(individualEvent: pin)
+//                } label: {
+//                    }
+               
             }
         }
         .mapControls {
@@ -405,7 +642,7 @@ private extension CLGeocoder {
         }
     }
 }
-
+*/
 
 
 // v1
@@ -638,6 +875,6 @@ struct MapView: View {
 */
 
 #Preview {
-    MapView()
+    MapView(results: funvibes)
 }
 
