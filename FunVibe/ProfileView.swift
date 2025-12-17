@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @State var user: User?
+    //@State var user: User?
 
     var body: some View {
         NavigationStack {
@@ -26,19 +26,36 @@ struct ProfileView: View {
                     }
                 } else {
                     VStack {
-                        if (user != nil){
-                            Text("Welcome, \(user!.fullName)")
-                        }
-                        //Text(user!.fullName)
-                            //.font(.title2).bold()
 
+                        let userMailId: String = UserDefaults.standard.string(forKey: "userRef") ?? ""
+                        let user = findUser(email: userMailId)
 
-                            ForEach (funvibes) { activity in
-                                //UUID(uuidString: yourString)
-//                                if (activity.organiser as! AnyHashable == user as! AnyHashable) {
-                                 Text(activity.title)
-//                                }
+                        Text("\(user?.fullName ?? "")")
+                            .font(.largeTitle)
+                            .padding()
+
+                        Section(header: Text("Activités organisées").bold()) {
+                            List (funvibes) { activity in
+                                if (activity.organiser.email == user?.email) {
+                                    Text(activity.title)
+
+                                    }
+                                }
                             }
+
+                        Section(header: Text("Activités auxquelles participé").bold()) {
+                            List (funvibes) { activity in
+                                List(activity.participants ?? []) { participant in
+                                    if (participant.email == user?.email) {
+                                        Text(activity.title)
+                                    }
+                                }
+
+                                }
+                            }
+                        }
+
+
 
 
 
@@ -89,8 +106,8 @@ struct ProfileView: View {
 
                     }
                 }
-            }
-            .ignoresSafeArea(edges: .all)
+            
+            //.ignoresSafeArea(edges: .all)
             .navigationBarTitle("Profile")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -116,5 +133,5 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView(user:ben)
+    ProfileView()
 }

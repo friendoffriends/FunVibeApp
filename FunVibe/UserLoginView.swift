@@ -11,6 +11,8 @@ struct UserLoginView: View {
 
     @AppStorage("isLoggedIn") private var isLoggedIn = false
     @AppStorage("isAdmin") private var isAdmin: Bool = false
+    @AppStorage("userRef") private var user: String = ""
+
     @State private var username = ""
     @State private var password = ""
     //@State private var isAdmin: Bool = false
@@ -32,7 +34,11 @@ struct UserLoginView: View {
                                 Text("Continue to Admin profile")
                             }
                         } else {
-                            NavigationLink(destination: ProfileView(user:findUser(email:username))) {
+                            NavigationLink(
+                                destination: ProfileView()
+                                )
+                            {
+                                //Text(username)
                                 Text("Continue to your profile")
                             }
                         }
@@ -98,11 +104,15 @@ struct UserLoginView: View {
     private func authenticateUser() {
         if findUser(email: username) != nil {
             if findUserPassword(email: username, password: password) ?? false{
+
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                UserDefaults.standard.set(false, forKey: "isAdmin")
+                UserDefaults.standard.set(username, forKey: "userRef")
+
                 isLoggedIn = true
                 $username.wrappedValue = ""
                 $password.wrappedValue = ""
-                UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                UserDefaults.standard.set(false, forKey: "isAdmin")
+
             }
             else{
                 print("Invalid credentials")
@@ -110,7 +120,7 @@ struct UserLoginView: View {
         }
         else if username == "admin" && password == "password" {
             isLoggedIn = true
-            $username.wrappedValue = ""
+            //$username.wrappedValue = ""
             $password.wrappedValue = ""
             UserDefaults.standard.set(true, forKey: "isLoggedIn")
             UserDefaults.standard.set(true, forKey: "isAdmin")
