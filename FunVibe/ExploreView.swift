@@ -139,7 +139,7 @@ struct ExploreView: View {
                         }
                     }
                     ToolbarItem(placement: .navigationBarLeading) {
-                        NavigationLink(destination: MapView()) {
+                        NavigationLink(destination: MapView(results: funvibes)) { //i changed this to add parameter to NavigationLink (Chris)
                             Image(systemName: "map.circle")
                                 .font(Font.title.bold()).foregroundColor(.orange)
                         }
