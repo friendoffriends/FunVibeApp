@@ -18,11 +18,11 @@ struct ProfileField: View {
         VStack(alignment: .leading, spacing: 6) {
                 
             Text(title)
-                .font(.title2)
+                .font(.title)
             
             ZStack(alignment: .trailing) {
                 TextField(placeholder, text: $text)
-                    .font(.title2)
+                    .font(.title)
                     .padding(.trailing, 30)
                     .padding()
                         .background(Color.white) 
