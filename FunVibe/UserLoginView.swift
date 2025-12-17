@@ -45,55 +45,56 @@ struct UserLoginView: View {
 
                 } else {
                     VStack {
-                        TextField("email d'utilisateur", text: $username)
+                        
+                        
+                        VStack(alignment:.leading){
+                            Text("Nom d'utilisateur")
+                                .font(.title)
+                        TextField("Nom d'utilisateur", text: $username)
                             .frame(width: 300, )
-
-                            .font(.title2)
+                            .font(.title)
                             .padding(.trailing, 30)
                             .padding()
                             .background(Color.white)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(Color.orange, lineWidth: 2))
-                            .cornerRadius(12)
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.orange, lineWidth: 2))}
+                            .cornerRadius(20)
                             .autocapitalization(.none)
 
-                        SecureField("Mot de passe", text: $password)
-                            .frame(width: 330, )
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .autocapitalization(.none)
-                            .font(.title2)
-                            .padding()
-                            .background(Color.white)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(Color.orange, lineWidth: 2))
-                            .cornerRadius(12)
-                            .autocapitalization(.none)
-
+                        PasswordField(
+                            icon: "lock.fill",
+                            title: "Mot de passe",
+                            placeholder: "Mot de passe",
+                            text: $password
+                        )
+                        .frame(width: 360, )
                         Button("Login") {
                             authenticateUser()
 
                         }.disabled(username.isEmpty || password.isEmpty)
                             .padding()
                             .buttonStyle(PlainButtonStyle())
-                            .frame(maxWidth: 150, maxHeight: 60)
+                            .frame(maxWidth: 290, maxHeight: 60)
                             .background(Color(.systemGray6))
                             .cornerRadius(20)
+                            .font(.title)
+                            .padding(.top, 30 )
+                            .padding(.bottom, 30 )
 
-                        .padding(.bottom, 50)
 
                         NavigationLink(destination: CreateUserView()) {
                             Text("Créer un compte")
-                                .font(.title2)
+                                .font(.title)
                                 .foregroundColor(.white)
-                                .frame(maxWidth: 160)
+                                .frame(maxWidth: 260)
                                 .padding()
                                 .background(Color.blue)
-                                .cornerRadius(10)
+                                .cornerRadius(20)
                         }
 
                     }
+
                     .navigationTitle(Text("Login"))
                 }
             }

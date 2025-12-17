@@ -125,11 +125,11 @@ struct CreateUserView: View {
                     
                         // Toggles
                     Toggle("Notifications", isOn: $notificationsOn)
-                        .font(.title3)
+                        .font(.title)
                         .tint(.orange)
                     
                     Toggle("Profil public", isOn: $publicProfile)
-                        .font(.title3)
+                        .font(.title)
                         .tint(.orange)
                     
                         // Create Account Button
@@ -137,7 +137,7 @@ struct CreateUserView: View {
                         saveProfile()
                         showCreatedAlert = true
                     }
-                    .font(.title2)
+                    .font(.title)
                     .padding(.top)
                     .buttonStyle(.borderedProminent)
                     .tint(.orange)
@@ -155,7 +155,7 @@ struct CreateUserView: View {
         }
     }
     
-        // MARK: - Profile Persistence
+        // Profile Persistence
     
     private func getImageURL() -> URL? {
         let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first

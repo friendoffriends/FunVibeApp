@@ -20,7 +20,8 @@ struct HomeView: View {
                         Label("", systemImage: "house")
                     }
 
-                SearchView()
+                //SearchView()
+                MicrophoneView()
                     .tabItem {
                         Label("", systemImage: "magnifyingglass")
                     }

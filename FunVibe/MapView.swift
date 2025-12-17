@@ -94,14 +94,14 @@ struct MapView: View {
         }
     }
 
-    // MARK: - Trigger key (reruns when address strings change)
+    //  Trigger key (reruns when address strings change)
     private var resultsSignature: String {
         results
             .map { "\($0.id.uuidString)|\($0.location.geocodingString ?? "")" }
             .joined(separator: "||")
     }
 
-    // MARK: - Geocoding + pins + camera
+    //  Geocoding + pins + camera
 
     private func geocodeAndUpdateMap() async {
         let pending: [PendingPin] = results.compactMap { activity in
@@ -164,7 +164,7 @@ struct MapView: View {
         }
     }
 
-    // MARK: - Region fitting
+    //  Region fitting
 
     private func regionToFit(_ coordinates: [CLLocationCoordinate2D]) -> MKCoordinateRegion? {
         guard let first = coordinates.first else { return nil }
