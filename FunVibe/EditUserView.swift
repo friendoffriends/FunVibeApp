@@ -155,7 +155,7 @@ struct EditUserView: View {
                             saveProfile()
                         }
                     ))
-                    .font(.title3)
+                    .font(.title)
                     .tint(.orange)
                     
                     Toggle("Profil public", isOn: Binding(
@@ -165,14 +165,14 @@ struct EditUserView: View {
                             saveProfile()
                         }
                     ))
-                    .font(.title3)
+                    .font(.title)
                     .tint(.orange)
                     
                     Button("Supprimer mon compte") {
                         showDeleteAlert = true
                     }
                     .foregroundColor(.orange)
-                    .font(.title2)
+                    .font(.title)
                     .padding(.top)
                     .alert("Confirmer la suppression", isPresented: $showDeleteAlert) {
                         Button("Supprimer", role: .destructive) {
@@ -189,6 +189,7 @@ struct EditUserView: View {
                 .padding()
             }
             .navigationTitle("Profil")
+            .font(.title)
             .navigationDestination(isPresented: $isDeleted) {
                 EntryView() // Replace with your login/entry view
             }

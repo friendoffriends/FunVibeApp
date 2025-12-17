@@ -27,9 +27,9 @@ struct ProfileField: View {
                     .padding()
                         .background(Color.white) 
                         .overlay(
-                            RoundedRectangle(cornerRadius: 12)
+                            RoundedRectangle(cornerRadius: 20)
                                 .stroke(Color.orange, lineWidth: 2))
-                    .cornerRadius(12)
+                    .cornerRadius(20)
                 
                 Image(systemName: icon)
                     .foregroundColor(.gray)

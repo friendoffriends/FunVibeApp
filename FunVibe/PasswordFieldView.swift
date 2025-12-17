@@ -13,7 +13,7 @@ struct PasswordField: View {
         VStack(alignment: .leading, spacing: 6) {
             
             Text(title)
-                .font(.title2)
+                .font(.title)
             
             ZStack(alignment: .trailing) {
                 
@@ -24,15 +24,15 @@ struct PasswordField: View {
                         TextField(placeholder, text: $text)
                     }
                 }
-                .font(.title2)
+                .font(.title)
                 .padding(.trailing, 40)
                 .padding()
                 .background(Color.white)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 12)
+                    RoundedRectangle(cornerRadius: 20)
                         .stroke(Color.orange, lineWidth: 2)
                 )
-                .cornerRadius(12)
+                .cornerRadius(20)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
                 
