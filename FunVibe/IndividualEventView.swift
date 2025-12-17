@@ -55,32 +55,66 @@ struct IndividualEventView: View {
                         }
                         HStack{
                             Text(dateFormat(date: individualEvent.date)).italic()
-                                .font(.system(size: 18))
+                                .font(.system(size: 20))
                                 .padding(5)
                                 .padding(.leading, 10)
                             Text(timeFormat(date: individualEvent.date)).italic()
-                                .font(.system(size: 18))
-                                .padding(.leading, 10)
+                                .font(.system(size: 20))
+//                                .padding(.leading, 0)
 //                            Text(individualEvent.category.rawValue.capitalized)
                               //  .font(Font.caption).italic()
                             Text("Participants : ").italic()
-                                    .font(.system(size: 18))
-                                    .padding(.leading, 20)
+                                    .font(.system(size: 20))
+                                    .padding(.leading, 15)
                             Text("\(individualEvent.participants?.count ?? 0)").italic()
-                                .font(.system(size: 18))
+                                .font(.system(size: 20))
                                 .padding(.leading, 0)
+                            Spacer()
                         }
                         .foregroundColor(.orange)
+                        .padding(5)
                         .background(
                             Color.white
                                 .cornerRadius(10)
-                                .padding(25)
                                 .shadow(
                                     color: .black.opacity(0.3),
                                     radius: 10,
                                     x:0, y:10
                                 )
                         )
+                        HStack{
+                            /*Text("\(individualEvent.location.street ?? "") \
+                            \(individualEvent.location.city ?? "") \
+                            \(individualEvent.location.postCode ?? "")")*/
+//                            Text(individualEvent.location.street ?? "") + Text(" ")
+//                               + Text(individualEvent.location.city ?? "") + Text(" ")
+//                               + Text(individualEvent.location.postCode ?? "")
+//                                .italic()
+//                                .font(.system(size: 20))
+//                                .padding(10)
+                            (
+                                Text(individualEvent.location.street ?? "") + Text(", ")
+                                + Text(individualEvent.location.city ?? "") + Text(" ")
+                                + Text(individualEvent.location.postCode ?? "")
+                            )
+                            .italic()
+                            .font(.system(size: 20))
+                            .padding(5)
+                            .padding(10)
+                            Spacer()
+                        }
+                        .foregroundColor(.orange)
+                        .background(
+                            Color.white
+                                .cornerRadius(10)
+                                .padding(5)
+                                .shadow(
+                                    color: .black.opacity(0.3),
+                                    radius: 10,
+                                    x:0, y:10
+                                )
+                        )
+                       
                         
                         
 
@@ -92,7 +126,7 @@ struct IndividualEventView: View {
                                     HStack{
                                         Text(individualEvent.description)
     //                                            .font(.subheadline)
-                                            .font(.system(size: 16))
+                                            .font(.system(size: 18))
                                             .multilineTextAlignment(.leading)
                                             .lineLimit(12)
                                             // changed from 2 to 12

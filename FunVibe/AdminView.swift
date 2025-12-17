@@ -41,6 +41,7 @@ struct AdminView: View {
                             HStack {
                                 Text(user.fullName).bold()
                                 Text(user.email)
+                                Text(user.password)
                                 Spacer()
                                 Image(systemName: "minus.circle")
                             }
