@@ -28,7 +28,9 @@ struct ExploreView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 16) {
                                 ForEach(funvibes) { activity in
-                                    NavigationLink {} label: {
+                                    NavigationLink {
+                                        IndividualEventView(individualEvent: activity)
+                                    } label: {
                                         Image(activity.image ?? "photo")
                                         
                                             .resizable()
