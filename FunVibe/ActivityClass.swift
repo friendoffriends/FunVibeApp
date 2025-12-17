@@ -11,8 +11,8 @@
 
 import Foundation
 
-class Activity: Identifiable {
-    var id: UUID
+class Activity: Identifiable, Hashable {
+    let id: UUID // changed from var 17-12-25 Chris
     var title: String
     var date: Date
     var location: Address
@@ -35,6 +35,17 @@ class Activity: Identifiable {
         self.type = type
         self.organiser = organiser
         self.participants = participants
+    }
+}
+
+// Added extension to Activity to make it hashable, to work with MapView (17-12-25)
+extension Activity {
+    static func == (lhs: Activity, rhs: Activity) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
 
@@ -83,23 +94,23 @@ class Interest: Activity {
 }
 
 
-enum ActivityType: String {
+enum ActivityType: CaseIterable {
     case event, club , interest
 }
 
-enum ClubCategory: String{
+enum ClubCategory: CaseIterable {
     case social_community, health_wellness, hobby_base, learning_intellectual, entertainment, recreation , technology_modern, other
 }
 
-enum EventTheme: String{
+enum EventTheme: CaseIterable {
     case comedy, concert, sports, art_culture, food_drink, family, gaming, other
 }
 
-enum ExperienceLevel: String{
+enum ExperienceLevel: CaseIterable {
     case beginner, novice, intermediate, advanced, expert, master, any
 }
 
-enum DifficultyLevel: String{
+enum DifficultyLevel: CaseIterable {
     case veryeasy, easy, moderate, challenging, hard, extreme, any
 }
 

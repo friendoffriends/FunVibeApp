@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @State var user: User?
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -15,6 +17,7 @@ struct ProfileView: View {
                 Image("Background")
                     .resizable()
                     .opacity(0.5)
+                    .ignoresSafeArea(edges: .all)
 
                 //Content
                 if UserDefaults.standard.bool(forKey: "isLoggedIn") == false {
@@ -23,23 +26,89 @@ struct ProfileView: View {
                     }
                 } else {
                     VStack {
-                        Text("Profile")
-                            .font(.largeTitle)
-                            .foregroundColor(.primary)
+                        if (user != nil){
+                            Text("Welcome, \(user!.fullName)")
+                        }
+                        //Text(user!.fullName)
+                            //.font(.title2).bold()
 
-                            .padding(20)
 
-                        NavigationLink(destination: UserLoginView()) {
-                            Image(systemName: "person.slash")
-                                .font(Font.title.bold()).foregroundColor(.orange)
-                        }.simultaneousGesture(TapGesture().onEnded {
-                            setLogout()
-                        })
+                            ForEach (funvibes) { activity in
+                                //UUID(uuidString: yourString)
+//                                if (activity.organiser as! AnyHashable == user as! AnyHashable) {
+                                 Text(activity.title)
+//                                }
+                            }
+
+
+
+
+
+//                            NavigationLink {
+//                                //
+//                            } label: {
+//                                HStack {
+//
+//
+//                                    VStack(alignment: .leading){
+//                                        Text(activity.title)
+//                                            .font(Font.headline.bold())
+//
+//                                        HStack{
+//                                            Spacer()
+//                                            Text(dateFormat(date: activity.date)).italic()
+//                                            Spacer()
+//                                            Text(timeFormat(date: activity.date)).italic()
+//                                            Spacer()
+//                                            //Text(activity.category.rawValue.capitalized)
+//                                            //  .font(Font.caption).italic()
+//                                        }
+//                                        HStack{
+//                                            Image(systemName: "person.2.fill")
+//                                            Text("Participants : ")
+//                                                .font(Font.subheadline).italic()
+//                                            //Text(activity.participants.count)
+//                                        }
+//                                    }
+//                                    .padding(20)
+//                                }
+//                                .foregroundColor(.orange)
+//                                .background(
+//                                    Color.white
+//                                        .cornerRadius(10)
+//                                        .padding(5)
+//                                        .shadow(
+//                                            color: .black.opacity(0.3),
+//                                            radius: 10,
+//                                            x:0, y:10
+//                                        )
+//                                )
+//                            }
+
+
+
                     }
                 }
             }
             .ignoresSafeArea(edges: .all)
             .navigationBarTitle("Profile")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: UserLoginView()) {
+                        Image(systemName: "person.slash")
+                            .font(Font.title.bold()).foregroundColor(.orange)
+                    }.simultaneousGesture(TapGesture().onEnded {
+                        setLogout()
+                    })
+                }
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    NavigationLink(destination: ) {
+//                        Image(systemName: "")
+//                            .font(Font.title.bold()).foregroundColor(.orange)
+//                    }
+//
+//                }
+            }
 
         }
 
@@ -47,5 +116,5 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView()
+    ProfileView(user:ben)
 }
