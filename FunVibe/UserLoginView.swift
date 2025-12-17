@@ -32,7 +32,7 @@ struct UserLoginView: View {
                                 Text("Continue to Admin profile")
                             }
                         } else {
-                            NavigationLink(destination: ProfileView()) {
+                            NavigationLink(destination: ProfileView(user:findUser(email:username))) {
                                 Text("Continue to your profile")
                             }
                         }
@@ -50,6 +50,8 @@ struct UserLoginView: View {
                                 RoundedRectangle(cornerRadius: 12)
                                     .stroke(Color.orange, lineWidth: 2))
                             .cornerRadius(12)
+                            .autocapitalization(.none)
+
                         SecureField("Mot de passe", text: $password)
                             .frame(width: 330, )
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -61,6 +63,8 @@ struct UserLoginView: View {
                                 RoundedRectangle(cornerRadius: 12)
                                     .stroke(Color.orange, lineWidth: 2))
                             .cornerRadius(12)
+                            .autocapitalization(.none)
+
                         Button("Login") {
                             authenticateUser()
 

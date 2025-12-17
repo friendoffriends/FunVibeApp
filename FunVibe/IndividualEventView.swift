@@ -13,15 +13,16 @@ struct IndividualEventView: View {
 //    @State var searchText: String = ""
     @State var individualEvent: Activity
     var body: some View {
-        ZStack {
-            //Backgroound
-            Image("Background")
-                .resizable()
-                .opacity(0.5)
-                .ignoresSafeArea(edges: .all)
 
             //Content
             NavigationStack {
+                ZStack {
+                    //Backgroound
+                    Image("Background")
+                        .resizable()
+                        .opacity(0.5)
+                        .ignoresSafeArea(edges: .all)
+
                 ScrollView(.vertical){
                     VStack (alignment:.leading){
                         HStack{
@@ -136,7 +137,7 @@ struct IndividualEventView: View {
 //                }
 //            }
         }
-        
+
 
     }
 }
