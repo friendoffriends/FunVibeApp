@@ -33,22 +33,25 @@ import SwiftUI
 import UIKit
 
 struct CreateUserView: View {
-    
+        // User info states
     @State private var fullName = ""
     @State private var email = ""
     @State private var city = ""
     @State private var phoneNumber = ""
+    @State private var password = ""
     
     @State private var notificationsOn = false
     @State private var publicProfile = false
     
+        // Profile image
     @State private var showImagePicker = false
     @State private var image: UIImage? = nil
     
+        // Navigation & alerts
     @State private var showCreatedAlert = false
     @State private var navigateToEdit = false
     @State private var isCreated: Bool = false
-
+    
         // Keys for UserDefaults
     private let profileImageFileName = "profile.jpg"
     private let fullNameKey = "fullName"
@@ -63,7 +66,7 @@ struct CreateUserView: View {
             ScrollView {
                 VStack(spacing: 30) {
                     
-                        // Profile Image + Camera
+                        // Profile Image + Camera Button
                     ZStack(alignment: .bottomTrailing) {
                         Group {
                             if let image = image {
@@ -78,10 +81,7 @@ struct CreateUserView: View {
                         }
                         .frame(width: 220, height: 220)
                         .clipShape(Circle())
-                        .overlay(
-                            Circle()
-                                .stroke(Color.orange, lineWidth: 2)
-                        )
+                        .overlay(Circle().stroke(Color.orange, lineWidth: 2))
                         .shadow(radius: 5)
                         
                         Button {
@@ -106,13 +106,24 @@ struct CreateUserView: View {
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     
+                        // Input Fields
                     VStack(spacing: 20) {
                         ProfileField(icon: "person.fill", title: "Nom complet", placeholder: "Nom complet", text: $fullName)
                         ProfileField(icon: "envelope.fill", title: "Email", placeholder: "Email", text: $email)
                         ProfileField(icon: "house.fill", title: "Ville", placeholder: "Ville", text: $city)
                         ProfileField(icon: "phone.fill", title: "Téléphone", placeholder: "Téléphone", text: $phoneNumber)
+                        
+                            // Password Field
+                        PasswordField(
+                            icon: "lock.fill",
+                            title: "Mot de passe",
+                            placeholder: "Mot de passe",
+                            text: $password
+                        )
                     }
+                    .padding(.horizontal)
                     
+                        // Toggles
                     Toggle("Notifications", isOn: $notificationsOn)
                         .font(.title3)
                         .tint(.orange)
@@ -121,6 +132,7 @@ struct CreateUserView: View {
                         .font(.title3)
                         .tint(.orange)
                     
+                        // Create Account Button
                     Button("Créer mon compte") {
                         saveProfile()
                         showCreatedAlert = true
@@ -134,10 +146,8 @@ struct CreateUserView: View {
                 }
                 .padding()
                 .navigationDestination(isPresented: $isCreated) {
-                    //EditUserView() // Replace with your login/entry view
                     UserLoginView()
                 }
-                .presentationDetents([.fraction(0.5)])
             }
             .navigationDestination(isPresented: $navigateToEdit) {
                 EditUserView()
@@ -145,7 +155,8 @@ struct CreateUserView: View {
         }
     }
     
-        // Profile Persistence
+        // MARK: - Profile Persistence
+    
     private func getImageURL() -> URL? {
         let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         return documents?.appendingPathComponent(profileImageFileName)
@@ -168,16 +179,16 @@ struct CreateUserView: View {
         if let img = image {
             saveImage(img)
         }
-
+        
         isCreated = true
-
-        //init(fullName: String, email: String, phoneNumber: String? = nil, password: String, address: Address, notificationsOn: Bool? = nil, publicProfile: Bool = false)
+        
+            // Save user to array (make sure `users` exists globally)
         let user = User(
             fullName: fullName,
             email: email,
             phoneNumber: phoneNumber,
-            password: "password",
-            address: Address(street:"", city: city, postCode: ""),
+            password: password,
+            address: Address(street: "", city: city, postCode: ""),
             notificationsOn: notificationsOn,
             publicProfile: publicProfile
         )
