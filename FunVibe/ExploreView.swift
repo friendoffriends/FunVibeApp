@@ -89,24 +89,22 @@ struct ExploreView: View {
                                     VStack(alignment: .leading){
                                         Text(activity.title)
                                             .font(Font.headline.bold())
-                                        Text(activity.description)
-                                            .font(.title3)
-                                            .multilineTextAlignment(.leading)
-                                            .lineLimit(1)
                                         HStack{
-                                            Spacer()
                                             Text(dateFormat(date: activity.date)).italic()
-                                            Spacer()
+                                                .padding(.trailing, 10) 
                                             Text(timeFormat(date: activity.date)).italic()
                                             Spacer()
                                             //Text(activity.category.rawValue.capitalized)
                                               //  .font(Font.caption).italic()
                                         }
+                                        Text(activity.description)
+                                            .font(.system(size: 18))
+                                            .multilineTextAlignment(.leading)
+                                            .lineLimit(1)
                                         HStack{
                                             Image(systemName: "person.2.fill")
-                                            Text("Participants : ")
+                                            Text("Participants : \(activity.participants?.count ?? 0)")
                                                 .font(Font.subheadline).italic()
-                                                //Text(activity.participants.count)
                                         }
                                     }
                                     .padding(20)

@@ -24,10 +24,17 @@ struct IndividualEventView: View {
             NavigationStack {
                 ScrollView(.vertical){
                     VStack (alignment:.leading){
-                        Text(individualEvent.title).font(.largeTitle)
-                            .fontWeight(.bold)
-                            .foregroundColor(.orange)
-                            .padding(.leading)
+                        HStack{
+                            Text(individualEvent.title).font(.largeTitle)
+                                .fontWeight(.bold)
+                                .foregroundColor(.orange)
+                                .padding(.leading)
+                            Spacer()
+                            NavigationLink(destination: MapView(results: [individualEvent])) {
+                                Image(systemName: "map.circle")
+                                    .font(Font.largeTitle.bold()).foregroundColor(.orange)
+                            }
+                        }
                         if individualEvent.image == "" {
                             Image(systemName: "photo.fill")
                                 .resizable()
