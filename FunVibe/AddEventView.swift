@@ -19,8 +19,8 @@ struct AddEventView: View {
     
     @State private var showCreatedAlert = false
     @State private var navigateToDescription = false
-    let activityTypes = ["Sport", "Art", "Musique", "balade", "autre"]
-    
+    let activityTypes = ["comédie", "concerts", "sports", "art et culture", "gastronomie", "famille", "jeux vidéo", "autres"]
+
         // Store image locally
     private let activityImageFileName = "activity_image.jpg"
     
