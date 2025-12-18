@@ -14,9 +14,12 @@ var benAddress: Address {Address(street: "31 Rue Jacques-Jean Esquie", city: "To
 var kevinAddress: Address {Address(street: "78 Chem. du Séminaire", city: "Toulouse", postCode: "31200")}
 var marthaAddress: Address {Address(street: "28 Rue Isaac Newton", city: "Blagnac", postCode: "31700")}
 var janeAddress: Address {Address(street: "6 Rue du Roussillon", city: "Toulouse", postCode: "31000")}
+var armanceAddress: Address {Address(street: "26 Rue du Roussillon", city: "Toulouse", postCode: "31000")}
+
 
 var club1Address: Address {Address(street: "10 Chem. de Liffard",city: "Toulouse",postCode: "31000")}
 var club2Address: Address {Address(street: "78 Chem. du Loup", city: "Toulouse", postCode: "31100")}
+var club3Address: Address {Address(street: "45 Rue des Fontaines", city: "Toulouse", postCode: "31300")}
 
 var event1Address: Address {Address(street: "3 Rue Hubert Monloup", city: "Toulouse", postCode: "31200")}
 var event2Address: Address {Address(street: "167 Rue du Riou", city: "Beauzelle", postCode: "31700")}
@@ -35,6 +38,7 @@ var ben = User(fullName: "Ben", email: "ben@outlook.com", phoneNumber:"075344564
 var kevin = User(fullName: "Kevin", email: "kevin@google.com", phoneNumber:"0753445645" ,password: "password3456", address: kevinAddress)
 var martha = User(fullName: "Martha", email: "marth@yahoo.com", phoneNumber:"0753445645" ,password: "password4567", address: marthaAddress)
 var jane = User(fullName: "Jane", email: "jane@sfr.fr", phoneNumber:"0753445645" ,password: "password5678", address: janeAddress)
+var armance = User(fullName: "Armance", email: "armance@sfr.fr", phoneNumber:"0745445645" ,password: "apple1234", address: armanceAddress)
 
 
 var users: [User] = [john, ben, kevin, martha, jane]
@@ -101,7 +105,27 @@ var majongInterest: Interest = Interest(
 
 )
 
+var sewingInterest: Interest = Interest(
+    title: "Couture",
+    date: Date(),
+    location: club3Address,
+    description: "Coudre au sein d'un groupe.",
+    image: "sewing-image",
+    type: .interest,
+    organiser: martha,
+    participants: [martha],
+    category: "couture",
+    skillLevel: .any,
+    difficultyLevel: .any,
+    solo: false,
+    duration: 1.0,
+    cost: 0.0,
+    benefit: ["Nouveaux amis", "Intération sociale", "Amélioration des compétences sociales"],
+
+)
+
+
 
 var funvibes: [Activity] = [
-    clubGameNight,bookClub,eventComedyShow, majongInterest
+    clubGameNight,bookClub,eventComedyShow, majongInterest, sewingInterest
 ]
