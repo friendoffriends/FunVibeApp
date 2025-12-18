@@ -16,6 +16,7 @@ struct UserLoginView: View {
     @State private var username = ""
     @State private var password = ""
     //@State private var isAdmin: Bool = false
+    @State private var isError: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -72,7 +73,14 @@ struct UserLoginView: View {
                         Button("Login") {
                             authenticateUser()
 
-                        }.disabled(username.isEmpty || password.isEmpty)
+                        }
+                        .disabled(username.isEmpty || password.isEmpty)
+                        .alert("Vérifiez votre adresse e-mail \nou votre mot de passe.", isPresented: $isError, actions: {
+                            Button("OK") {
+                                //isError = false
+                            }
+                        })
+
                             .padding()
                             .buttonStyle(PlainButtonStyle())
                             .frame(maxWidth: 290, maxHeight: 60)
@@ -81,6 +89,7 @@ struct UserLoginView: View {
                             .font(.title)
                             .padding(.top, 30 )
                             .padding(.bottom, 30 )
+
 
 
                         NavigationLink(destination: CreateUserView()) {
@@ -104,29 +113,34 @@ struct UserLoginView: View {
     private func authenticateUser() {
         if findUser(email: username) != nil {
             if findUserPassword(email: username, password: password) ?? false{
-
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 UserDefaults.standard.set(false, forKey: "isAdmin")
                 UserDefaults.standard.set(username, forKey: "userRef")
-
                 isLoggedIn = true
                 $username.wrappedValue = ""
                 $password.wrappedValue = ""
-
+                isError = false
             }
             else{
-                print("Invalid credentials")
+                //print("Invalid credentials")
+                isError = true
+                $username.wrappedValue = ""
+                $password.wrappedValue = ""
             }
         }
         else if username == "admin" && password == "password" {
             isLoggedIn = true
-            //$username.wrappedValue = ""
+            $username.wrappedValue = ""
             $password.wrappedValue = ""
             UserDefaults.standard.set(true, forKey: "isLoggedIn")
             UserDefaults.standard.set(true, forKey: "isAdmin")
+            isError = false
         }
         else {
             print("Invalid credentials")
+            isError = true
+            $username.wrappedValue = ""
+            $password.wrappedValue = ""
         }
     }
 }
