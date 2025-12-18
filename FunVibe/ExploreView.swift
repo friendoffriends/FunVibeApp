@@ -105,7 +105,7 @@ struct ExploreView: View {
                                             .lineLimit(1)
                                         HStack{
                                             Image(systemName: "person.2.fill")
-                                            Text("Participants : \(activity.participants?.count ?? 0)")
+                                            Text("Participants : \(activity.participants.count)")
                                                 .font(Font.subheadline).italic()
                                         }
                                     }

@@ -26,7 +26,7 @@ var event2Address: Address {Address(street: "167 Rue du Riou", city: "Beauzelle"
 
 
 var addresses: [Address] = [
-    johnAddress, benAddress, kevinAddress, marthaAddress, janeAddress,
+    johnAddress, benAddress, kevinAddress, marthaAddress, janeAddress, armanceAddress,
     club1Address,club2Address,
     event1Address,event2Address
 ]
@@ -41,7 +41,7 @@ var jane = User(fullName: "Jane", email: "jane@sfr.fr", phoneNumber:"0753445645"
 var armance = User(fullName: "Armance", email: "armance@sfr.fr", phoneNumber:"0745445645" ,password: "apple1234", address: armanceAddress)
 
 
-var users: [User] = [john, ben, kevin, martha, jane]
+var users: [User] = [john, ben, kevin, martha, jane, armance]
 
 
 
@@ -54,7 +54,7 @@ var clubGameNight:Club = Club(
     image:  "Game-Night-image",
     type: .club,
     organiser: john,
-    participants: [john, ben, kevin],
+    participants: [armance, ben, kevin],
     category: .hobby_base,
     objective: ["Have fun", "Make new friends"],
     activities: ["Video games", "Board games", "Card games"]
@@ -112,7 +112,7 @@ var sewingInterest: Interest = Interest(
     description: "Coudre au sein d'un groupe.",
     image: "sewing-image",
     type: .interest,
-    organiser: martha,
+    organiser: armance,
     participants: [martha],
     category: "couture",
     skillLevel: .any,
