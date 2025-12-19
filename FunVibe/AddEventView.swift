@@ -19,8 +19,8 @@ struct AddEventView: View {
     
     @State private var showCreatedAlert = false
     @State private var navigateToDescription = false
-    let activityTypes = ["Sport", "Art", "Musique", "balade", "autre"]
-    
+    let activityTypes = ["comédie", "concerts", "sports", "art et culture", "gastronomie", "famille", "jeux vidéo", "autres"]
+
         // Store image locally
     private let activityImageFileName = "activity_image.jpg"
     
@@ -159,6 +159,7 @@ struct AddEventView: View {
 
                     Button("Créer l'événement") {
                         saveImage(image) // Save image locally
+                        saveEvent()
                         showCreatedAlert = true
                     }
                     .font(.title2)
@@ -221,6 +222,30 @@ struct AddEventView: View {
               let data = pickedImage.jpegData(compressionQuality: 0.8) else { return }
         let url = getDocumentsDirectory().appendingPathComponent(activityImageFileName)
         try? data.write(to: url)
+
+    }
+
+    private func saveEvent() {
+        // Save event to array funVibes
+        let newEvent:Event = Event(
+            title: title,
+            date: date,
+            location: janeAddress,
+            description: description,
+            image: "",
+            type: .event,
+            organiser: jane,
+            participants: [],
+            theme: .other
+        )
+
+        print(title)
+        print(date)
+        print(description)
+        //print(activityImageFileName)
+
+
+        funvibes.append(newEvent)
     }
 
     private func getDocumentsDirectory() -> URL {

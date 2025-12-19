@@ -32,29 +32,41 @@ struct ProfileView: View {
 
                         Text("\(user?.fullName ?? "")")
                             .font(.largeTitle)
-                            .padding()
+                            .padding(5)
 
-                        Section(header: Text("Activités organisées").bold()) {
-                            List (funvibes) { activity in
-                                if (activity.organiser.email == user?.email) {
-                                    Text(activity.title)
-
+                        Section(header: Text("Activités organisées")
+                            .font(Font.title3.bold())
+                            .foregroundColor(.orange)) {
+                                List (funvibes) { activity in
+                                    if (activity.organiser.email == user?.email) {
+                                        HStack{
+                                            Text(activity.title)
+                                            Spacer()
+                                            Image(systemName: "minus.circle")
+                                                .foregroundStyle(Color.red)
+                                        }
                                     }
                                 }
                             }
 
-                        Section(header: Text("Activités auxquelles participé").bold()) {
-                            List (funvibes) { activity in
-                                List(activity.participants ?? []) { participant in
-                                    if (participant.email == user?.email) {
-                                        Text(activity.title)
+                        Section(header: Text("Activités auxquelles participé")
+                            .font(Font.title3.bold())
+                            .foregroundColor(.orange)) {
+                                List (funvibes) { activity in
+                                    ForEach (activity.participants) { participant in
+                                        if (participant.email == user?.email) {
+
+                                            HStack{
+                                                Text(activity.title)
+                                                Spacer()
+                                                Image(systemName: "minus.circle")
+                                                    .foregroundColor(.red)
+                                            }
+                                        }
                                     }
                                 }
-
-                                }
                             }
-                        }
-
+                    }
 
 
 

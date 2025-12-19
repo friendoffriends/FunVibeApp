@@ -20,12 +20,12 @@ class Activity: Identifiable, Hashable {
     var image: String? = nil
     var type: ActivityType
     var organiser: User
-    var participants: [User]? = []
+    var participants: [User]
     var imagePath: String?
 
     
 
-    init(title: String, date: Date, location: Address, description: String, image: String?, type: ActivityType, organiser: User, participants: [User]?) {
+    init(title: String, date: Date, location: Address, description: String, image: String?, type: ActivityType, organiser: User, participants: [User]) {
         self.id = UUID()
         self.title = title
         self.date = date
@@ -52,7 +52,7 @@ extension Activity {
 class Event : Activity {
     var theme: EventTheme
 
-    init(title: String, date: Date, location: Address, description: String, image: String?, type: ActivityType, organiser: User, participants: [User]?, theme: EventTheme) {
+    init(title: String, date: Date, location: Address, description: String, image: String?, type: ActivityType, organiser: User, participants: [User], theme: EventTheme) {
         self.theme = theme
         super.init(title: title, date: date, location: location, description: description, image: image ?? "", type: type, organiser: organiser, participants: participants)
     }
@@ -64,7 +64,7 @@ class Club  : Activity{
     var activities: [String]
     var subscription: Double? = 0.0
 
-    init(title: String, date: Date, location: Address, description: String, image: String?, type: ActivityType, organiser: User, participants: [User]?, category: ClubCategory, objective: [String], activities: [String], subscription: Double? = 0.0) {
+    init(title: String, date: Date, location: Address, description: String, image: String?, type: ActivityType, organiser: User, participants: [User], category: ClubCategory, objective: [String], activities: [String], subscription: Double? = 0.0) {
         self.category = category
         self.objective = objective
         self.activities = activities
@@ -81,7 +81,7 @@ class Interest: Activity {
     var cost: Double? = 0.0
     var benefit: [String]? = []
 
-    init(title: String, date:Date, location: Address, description: String, image: String?, type: ActivityType, organiser: User, participants: [User]?, category: String, skillLevel: ExperienceLevel, difficultyLevel: DifficultyLevel, solo: Bool, duration: Double, cost: Double? = 0.0, benefit: [String]? = []) {
+    init(title: String, date:Date, location: Address, description: String, image: String?, type: ActivityType, organiser: User, participants: [User], category: String, skillLevel: ExperienceLevel, difficultyLevel: DifficultyLevel, solo: Bool, duration: Double, cost: Double? = 0.0, benefit: [String]? = []) {
         self.category = category
         self.skillLevel = skillLevel
         self.difficultyLevel = difficultyLevel

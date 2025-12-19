@@ -46,13 +46,13 @@ struct MapView: View {
                                 .font(.title2)
                                 .foregroundStyle(.red)
 
-                            Text(pin.activity.title)
-                                .font(.caption2)
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 3)
-                                .background(.thinMaterial)
-                                .clipShape(RoundedRectangle(cornerRadius: 6))
-                                .lineLimit(1)
+//                            //Text(pin.activity.title)
+//                                .font(.caption)
+//                                .padding(.horizontal, 6)
+//                                .padding(.vertical, 3)
+//                                .background(.thinMaterial)
+//                                .clipShape(RoundedRectangle(cornerRadius: 6))
+//                                .lineLimit(1)
                         }
                     }
                     .buttonStyle(.plain)

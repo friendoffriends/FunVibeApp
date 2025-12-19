@@ -16,7 +16,7 @@ struct AdminView: View {
                 Color.clear
                 //.resizable()
                     .opacity(0.5)
-                    .ignoresSafeArea(edges: .all)
+                    //.ignoresSafeArea(edges: .all)
 
                 //Content
                 // ScrollView(.vertical){
@@ -49,31 +49,35 @@ struct AdminView: View {
                         }
                     }
 
-                    Section(header: Text("Addresses").bold()) {
-                        List(addresses) { address in
-                            HStack {
-                                Text(address.street ?? "")
-                                Text(address.city ?? "")
-                                Text(address.postCode ?? "")
-                                Spacer()
-                                Image(systemName: "minus.circle")
-                            }
-                        }
-                    }
+//                    Section(header: Text("Addresses").bold()) {
+//                        List(addresses) { address in
+//                            HStack {
+//                                Text(address.street ?? "")
+//                                Text(address.city ?? "")
+//                                Text(address.postCode ?? "")
+//                                Spacer()
+//                                Image(systemName: "minus.circle")
+//                            }
+//                        }
+//                    }
 
-
-                    NavigationLink(destination: UserLoginView()) {
-                        Image(systemName: "person.slash")
-                            .font(Font.title.bold()).foregroundColor(.orange)
-                    }.simultaneousGesture(TapGesture().onEnded {
-                        setLogout()
-                    })
 
                     }
                 //}
             }
         }
         .navigationTitle(Text("Admin"))
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink(destination: UserLoginView()) {
+                    Image(systemName: "person.slash")
+                        .font(Font.title.bold()).foregroundColor(.orange)
+                }.simultaneousGesture(TapGesture().onEnded {
+                    setLogout()
+                })
+            }
+        }
+
     }
 }
 

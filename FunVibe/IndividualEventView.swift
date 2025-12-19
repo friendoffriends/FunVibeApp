@@ -17,11 +17,12 @@ private let text   = Color(red: 240/255, green: 147/255, blue:  67/255)
 struct IndividualEventView: View {
 //    @State var searchText: String = ""
 //    @Binding var isInscrit: Bool
-//    @State var individualEvent: Activity
     @State private var isInscrit = false
     @State var individualEvent: Activity
+
+
     var body: some View {
-        
+
             //Content
             NavigationStack {
                 ZStack {
@@ -81,22 +82,20 @@ struct IndividualEventView: View {
                             Text("Participants : ").italic()
                                     .font(.system(size: 20))
                                     .padding(.leading, 15)
-                            Text("\(individualEvent.participants?.count ?? 0)").italic()
+
+                            var userRegs = individualEvent.participants.count
+                            Text("\(userRegs)").italic()
                                 .font(.system(size: 20))
                                 .padding(5)
                             Button {
                                 withAnimation(.easeInOut(duration: 0.15)) {
                                     isInscrit.toggle()
-                                    
-//                                    $isInscrit = true              // use: isInscrit.toggle() to allow switching back
                                 }
                             } label: {
                                 Label(
                                     isInscrit ? "Inscrit" : "Inscrire",
                                     systemImage: isInscrit ? "person.fill.checkmark" : "person"
                                 )
-//                                Label(isInscrit ? "Inscrit", systemImage: "person.fill.checkmark" : "Inscrire")
-//                                Text(isInscrit ? "Inscrit \(personCheckmark.txt)" : "Inscrire")
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundStyle(text)
                                     .frame(width: 150, height: 44)
@@ -111,8 +110,11 @@ struct IndividualEventView: View {
                                     .shadow(color: borderColor.opacity(0.45), radius: 3, x: 0, y: 3)
                             }
                             .buttonStyle(.plain)
-                    //        .disabled(isInscrit) // remove if you want it tappable again
                             .padding(.leading, 25)
+                            //.disabled(isInscrit) // remove if you want it tappable again
+                            //.disabled(isLoggedin() == false)
+
+
                             Spacer()
                         }
                         .foregroundColor(.orange)
@@ -205,6 +207,9 @@ struct IndividualEventView: View {
                 .padding(5)
             }
         }
+    }
+    func isLoggedin() -> Bool {
+        UserDefaults.standard.bool(forKey: "isLoggedIn")
     }
 }
 
