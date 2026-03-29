@@ -104,9 +104,3 @@ Then:
 - Some files contain earlier experimental or commented-out code; they are kept for now, but the folder structure is cleaner and easier to maintain.
 - There are two Xcode project files in the repository, but `FunVibe.xcodeproj` is the one that matches the current synchronized source layout.
 
-## Next Cleanup Ideas
-
-- Rename a few files with spelling inconsistencies, such as `ActivityDesciptionView.swift` and `SendFileVieww.swift`
-- Remove unused experimental files and commented-out legacy code
-- Split large SwiftUI views into smaller reusable components
-- Add tests for helper functions and login behavior
